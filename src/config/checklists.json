@@ -8,10 +8,8 @@
         "Gollux": false,
         "Legion Quest": false,
         "Bosses": false,
-        "Commerci": {
-            "Commerci PQ": false,
-            "Commerci Solo": false
-        }
+        "Commerci PQ": false,
+        "Commerci Solo": false
     },
     "shift-checklist": {
         "WAP": false,
