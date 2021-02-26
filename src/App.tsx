@@ -1,8 +1,8 @@
-import Portal from "components/Portal";
+import AppRouter from "components/AppRouter";
 function App() {
   return (
     <div>
-      <Portal/>
+      <AppRouter/>
     </div>
   );
 }
