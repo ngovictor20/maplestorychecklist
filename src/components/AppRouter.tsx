@@ -4,8 +4,8 @@ import DailiesPage from 'pages/DailiesPage';
 import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import WeekliesPage from 'pages/WeekliesPage';
 import Header from 'components/Header';
-import { CharacterProvider } from 'providers/CharacterProvider';
 import CharacterList from 'components/CharacterList';
+import { CharacterProvider } from 'providers/CharacterProvider';
 
 const AppRouter = () => {
     //@ts-ignore
@@ -16,21 +16,23 @@ const AppRouter = () => {
         <div>
             <Router>
                 <Header />
-                <CharacterList list={characterList}/>
-                <Switch>
-                    <Route exact path="/">
-                        <LandingPage />
-                    </Route>
-                    <Route exact path="/dailies">
-                        <DailiesPage />
-                    </Route>
-                    <Route exact path="/weeklies">
-                        <WeekliesPage />
-                    </Route>
-                    <Route exact path="/quiche">
-                        <p>quiche</p>
-                    </Route>
-                </Switch>
+                <CharacterProvider value={{ characterList, currentCharIndex, setCurrentCharIndex }}>
+                    <CharacterList list={characterList} currentIndex={currentCharIndex} setCharIndex={setCurrentCharIndex} />
+                    <Switch>
+                        <Route exact path="/">
+                            <LandingPage />
+                        </Route>
+                        <Route exact path="/dailies">
+                            <DailiesPage />
+                        </Route>
+                        <Route exact path="/weeklies">
+                            <WeekliesPage />
+                        </Route>
+                        <Route exact path="/quiche">
+                            <p>quiche</p>
+                        </Route>
+                    </Switch>
+                </CharacterProvider>
             </Router>
         </div>
     )
