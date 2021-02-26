@@ -1,12 +1,16 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-export const characterSlice = createSlice({
-    name: 'character',
+export const stateSlice = createSlice({
+    name: 'state',
     initialState: {
+      checklist: {},
       characters: [],
       characterIndex: 0,
     },
     reducers: {
+      updateChecklist: (state, action) => {
+        state.checklist = action.payload
+      },
       updateCharList: (state, action) => {
         state.characters = action.payload
       },
@@ -17,7 +21,7 @@ export const characterSlice = createSlice({
   })
   
   // Action creators are generated for each case reducer function
-  export const { setCharIndex, updateCharList} = characterSlice.actions
+  export const { updateChecklist,setCharIndex,updateCharList } = stateSlice.actions
   
-  export default characterSlice.reducer
+  export default stateSlice.reducer
 
