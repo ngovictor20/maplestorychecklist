@@ -5,7 +5,8 @@ import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import WeekliesPage from 'pages/WeekliesPage';
 import Header from 'components/Header';
 import CharacterList from 'components/CharacterList';
-import { CharacterProvider } from 'providers/CharacterProvider';
+import { Provider } from 'react-redux';
+import store from 'redux/store';
 
 const AppRouter = () => {
     //@ts-ignore
@@ -14,10 +15,10 @@ const AppRouter = () => {
     console.log(characterList);
     return (
         <div>
-            <Router>
-                <Header />
-                <CharacterProvider value={{ characterList, currentCharIndex, setCurrentCharIndex }}>
-                    <CharacterList list={characterList} currentIndex={currentCharIndex} setCharIndex={setCurrentCharIndex} />
+            <Provider store={store}>
+                <Router>
+                    <Header />
+                    <CharacterList />
                     <Switch>
                         <Route exact path="/">
                             <LandingPage />
@@ -32,8 +33,8 @@ const AppRouter = () => {
                             <p>quiche</p>
                         </Route>
                     </Switch>
-                </CharacterProvider>
-            </Router>
+                </Router>
+            </Provider>
         </div>
     )
 }

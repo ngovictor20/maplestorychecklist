@@ -1,6 +1,5 @@
 import React from 'react';
 import { Character } from 'types';
-import CharacterContext from 'providers/CharacterProvider';
 interface CharacterProps {
     list: Array<Character>;
     currentIndex: number;
