@@ -4,15 +4,19 @@ import DailiesPage from 'pages/DailiesPage';
 import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import WeekliesPage from 'pages/WeekliesPage';
 import Header from 'components/Header';
+import { CharacterProvider } from 'providers/CharacterProvider';
+import CharacterList from 'components/CharacterList';
 
 const AppRouter = () => {
     //@ts-ignore
-    const [characters, setCharacters]= useState(JSON.parse(localStorage.getItem("characters")));
-    console.log(characters);
+    const [characterList, setCharacterList] = useState(JSON.parse(localStorage.getItem("characters")));
+    const [currentCharIndex, setCurrentCharIndex] = useState(0);
+    console.log(characterList);
     return (
         <div>
             <Router>
                 <Header />
+                <CharacterList list={characterList}/>
                 <Switch>
                     <Route exact path="/">
                         <LandingPage />

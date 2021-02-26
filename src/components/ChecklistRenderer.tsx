@@ -1,5 +1,5 @@
 import React from 'react';
-import { Checklist } from 'types/ChecklistTypes';
+import { Checklist } from 'types';
 
 interface ChecklistProps {
     checklist: Checklist;
