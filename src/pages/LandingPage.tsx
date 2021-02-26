@@ -6,13 +6,13 @@ const LandingPage = () => {
         <div>
             <Link to="/dailies">
                 Dailies
-                </Link>
+            </Link>
             <Link to="/weeklies">
                 Weeklies
-                </Link>
+            </Link>
             <Link to="/quiche">
                 Quiche
-                </Link>
+            </Link>
         </div>
     )
 }
