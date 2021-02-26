@@ -3,11 +3,13 @@ import React from 'react'
 import DailiesPage from 'pages/DailiesPage';
 import { Link, BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import WeekliesPage from 'pages/WeekliesPage';
+import Header from 'components/Header';
 
 const AppRouter = () => {
     return (
         <div>
             <Router>
+                <Header/>
                 <Switch>
                     <Route exact path="/">
                         <LandingPage />
