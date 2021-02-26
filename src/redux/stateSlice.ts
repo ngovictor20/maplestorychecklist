@@ -1,4 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import checklist from "config/checklists";
 import { isEmpty } from "lodash";
 import { Character, FullChecklist } from "types";
@@ -38,10 +38,13 @@ export const stateSlice = createSlice({
       //@ts-ignore
         localStorage.getItem(state.characters[state.characterIndex])
       );
-      if (isEmpty(storage)) {
+      if (!isEmpty(storage)) {
         state.checklist = storage;
+        console.log(state.checklist);
       } else {
+        console.log("Hello");
         state.checklist = checklist;
+        console.log(current(state).checklist);
       }
       state.characterIndex = action.payload;
     },
