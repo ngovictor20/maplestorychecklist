@@ -1,5 +1,5 @@
 {
-    "daily-checklist": {
+    "dailyChecklist": {
         "Arcane Dailies": false,
         "Ursus": false,
         "Maple Tour": false,
@@ -11,7 +11,7 @@
         "Commerci PQ": false,
         "Commerci Solo": false
     },
-    "shift-checklist": {
+    "shiftChecklist": {
         "WAP": false,
         "2x": false,
         "Legion": false,
@@ -23,7 +23,7 @@
         "Legion Board Review": false,
         "Pets": false
     },
-    "weekly-bosses": {
+    "weeklyBosses": {
         "HMag": false,
         "CZak": false,
         "HHila": false,
