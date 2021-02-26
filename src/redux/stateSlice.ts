@@ -1,4 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
+import checklist from 'config/checklists';
+import _ from 'lodash';
 
 export const stateSlice = createSlice({
     name: 'state',
@@ -15,12 +17,18 @@ export const stateSlice = createSlice({
         state.characters = action.payload
       },
       setCharIndex: (state, action) => {
+        //@ts-ignore
+        const storage = JSON.parse(localStorage.getItem(state.characters[state.characterIndex]));
+        if(_.isEmpty(storage)){
+          state.checklist = storage;
+        }else{
+          state.checklist = checklist;
+        }
         state.characterIndex = action.payload
       },
     }
   })
   
-  // Action creators are generated for each case reducer function
   export const { updateChecklist,setCharIndex,updateCharList } = stateSlice.actions
   
   export default stateSlice.reducer
