@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import {setCharIndex, updateCharList} from 'redux/stateSlice'
-import {useAppSelector, useAppDispatch} from 'redux/hooks'
+import {setCharIndex, updateCharList} from 'redux/stateSlice';
+import {useAppSelector, useAppDispatch} from 'redux/hooks';
 import { isEmpty } from 'lodash';
+import sampleCharacterList from 'config/sampleData';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(state=>state.characters);
@@ -11,7 +12,7 @@ const CharacterList: React.FC = () => {
     useEffect(()=>{
         const list = localStorage.getItem("characters");
         if(isEmpty(list)){
-            console.log("EMPTY")
+            localStorage.setItem('characters',JSON.stringify(sampleCharacterList));
         }else{
             dispatch(updateCharList(JSON.parse(list!.toString())))
         }
