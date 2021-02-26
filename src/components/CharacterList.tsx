@@ -1,21 +1,29 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { Character } from 'types';
-interface CharacterProps {
-    list: Array<Character>;
-    currentIndex: number;
-    setCharIndex: (number: number) => void;
-}
+import React, { useEffect } from 'react';
+import {setCharIndex, updateCharList} from 'redux/stateSlice'
+import {useAppSelector, useAppDispatch} from 'redux/hooks'
+import { isEmpty } from 'lodash';
 
 const CharacterList: React.FC = () => {
-    const charList = useSelector((state)=>state.characters);
+    const charList = useAppSelector(state=>state.characters);
+    const charIndex = useAppSelector(state=>state.characterIndex);
+    const dispatch = useAppDispatch();
+    console.log(charList, charIndex);
+    useEffect(()=>{
+        const list = localStorage.getItem("characters");
+        if(isEmpty(list)){
+            console.log("EMPTY")
+        }else{
+            dispatch(updateCharList(JSON.parse(list!.toString())))
+        }
+    },[])
+
     return (
     <div>
         <div>
-            {list && list.map((char, index) => (
+            {charList && charList.map((char, index) => (
                 <div onClick={
                     () => {
-                        setCharIndex(index);
+                        dispatch(setCharIndex(index));
                         console.log(index);
                     }
                 } key={char.name}>

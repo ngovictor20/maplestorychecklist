@@ -9,10 +9,6 @@ import { Provider } from 'react-redux';
 import store from 'redux/store';
 
 const AppRouter = () => {
-    //@ts-ignore
-    const [characterList, setCharacterList] = useState(JSON.parse(localStorage.getItem("characters")));
-    const [currentCharIndex, setCurrentCharIndex] = useState(0);
-    console.log(characterList);
     return (
         <div>
             <Provider store={store}>

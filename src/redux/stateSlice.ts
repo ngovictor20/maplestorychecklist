@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import checklist from "config/checklists";
 import { isEmpty } from "lodash";
 import { Character, FullChecklist } from "types";
+import { RootState } from "./store";
 
 interface IState{
   characters: Array<Character>;
@@ -53,5 +54,9 @@ export const {
   updateCharList,
   addChar
 } = stateSlice.actions;
+
+export const selectChecklist = (state: RootState) => state.checklist;
+export const selectCharacters = (state: RootState) => state.characters;
+export const selectCharacterIndex = (state: RootState) => state.characterIndex;
 
 export default stateSlice.reducer;
