@@ -1,19 +1,13 @@
 import React from 'react'
-import checklist from 'config/checklists.json';
+import checklist from 'config/checklists';
+import ChecklistRenderer from 'components/ChecklistRenderer';
 
 const WeekliesPage = () => {
     const weeklyBosses = checklist.weeklyBosses;
 
     return (
         <div>
-            {
-                Object.entries(weeklyBosses).map(([item,value])=>{
-                    return (<div>
-                        <input type="checkbox" className="rounded text-pink-500" defaultChecked={value}/>
-                        <label>{item}</label>
-                    </div>)
-                })
-            }
+             <ChecklistRenderer checklist={weeklyBosses}/>
         </div>
     )
 }
