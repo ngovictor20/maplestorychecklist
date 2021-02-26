@@ -4,6 +4,13 @@ interface Checklist{
 interface Character{
     name: string;
     class: string;
+    level: number;
 }
 
-export type {Checklist, Character};
+interface FullChecklist{
+    dailyChecklist: Checklist;
+    weeklyBosses: Checklist;
+    shiftChecklist: Checklist;
+}
+
+export type {Checklist, Character, FullChecklist };

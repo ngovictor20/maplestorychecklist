@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Character } from 'types';
 interface CharacterProps {
     list: Array<Character>;
@@ -6,7 +7,8 @@ interface CharacterProps {
     setCharIndex: (number: number) => void;
 }
 
-const CharacterList: React.FC<CharacterProps> = ({ list, setCharIndex }) => {
+const CharacterList: React.FC = () => {
+    const charList = useSelector((state)=>state.characters);
     return (
     <div>
         <div>
