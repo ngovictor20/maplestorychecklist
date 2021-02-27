@@ -4,13 +4,18 @@ import { isEmpty } from "lodash";
 import { Character, FullChecklist } from "types";
 import { RootState } from "./store";
 
-interface IState{
+interface IState {
   characters: Array<Character>;
   characterIndex: number;
   checklist: FullChecklist;
 }
 
-const initialState : IState = {
+interface checklistUpdateData {
+  field: string;
+  type: "weeklyBosses" | "dailyChecklist" | "shiftChecklist";
+}
+
+const initialState: IState = {
   checklist: {
     dailyChecklist: {},
     shiftChecklist: {},
@@ -24,20 +29,24 @@ export const stateSlice = createSlice({
   name: "state",
   initialState: initialState,
   reducers: {
-    updateChecklist: (state, action:  PayloadAction<FullChecklist>) => {
+    updateChecklist: (state, action: PayloadAction<FullChecklist>) => {
       state.checklist = action.payload;
     },
     updateCharList: (state, action: PayloadAction<Array<Character>>) => {
       state.characters = action.payload;
     },
-    addChar:(state, action: PayloadAction<Character>)=>{
+    addChar: (state, action: PayloadAction<Character>) => {
       state.characters.push(action.payload);
       console.log(current(state).characters);
-      localStorage.setItem("characters",JSON.stringify(current(state).characters));
+      localStorage.setItem("characters", JSON.stringify(current(state).characters));
+    },
+    updateChecklistItem: (state, action: PayloadAction<checklistUpdateData>) => {
+      state.checklist[action.payload.type][action.payload.field] = !state.checklist[action.payload.type][action.payload.field];
+      localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     },
     setCharIndex: (state, action: PayloadAction<number>) => {
       const storage = JSON.parse(
-      //@ts-ignore
+        //@ts-ignore
         localStorage.getItem(state.characters[action.payload].name)
       );
       if (!isEmpty(storage)) {
@@ -57,7 +66,8 @@ export const {
   updateChecklist,
   setCharIndex,
   updateCharList,
-  addChar
+  addChar,
+  updateChecklistItem
 } = stateSlice.actions;
 
 export const selectChecklist = (state: RootState) => state.checklist;
