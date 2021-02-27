@@ -12,21 +12,12 @@ interface DialogProps {
 }
 
 const StyledForm = styled.div`
-    padding: 2rem 4rem 2rem 4rem;
     display: flex;
     position: relative;
     flex-direction: column; 
     width: 60%;
     left: 50%;
     transform: translate(-50%, 0%);
-`;
-
-const StyledTextArea = styled.textarea`
-    resize: vertical;
-`;
-
-const StyledSubmitButton = styled.button`
-
 `;
 
 const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, setIsError, setErrorMsg }) => {
@@ -37,15 +28,31 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
 
     return (
         <StyledForm>
-            <label htmlFor="name" >Name</label>
-            <input type="text" name="name" onChange={(e) => { setName(e.target!.value) }} ></input>
-            <label htmlFor="class">Class</label>
-            <input type="text" name="class" onChange={(e) => { setJob(Class[e.target!.value! as keyof typeof Class]) }} ></input>
-            <label htmlFor="level">Level</label>
-            <input type="number" max={300} min={0} name="level" onChange={(e) => { setLevel(parseInt(e.target!.value)) }} value={level}/>
-            <StyledSubmitButton onClick={() => {
+            <label className="block">
+                <span>Name</span>
+                <input type="text" onChange={(e) => { setName(e.target!.value) }} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
+            </label>
+            <label className="block">
+                <span>Class</span>
+                <select onChange={(e) => { setJob(Class[e.target!.value! as keyof typeof Class]) }} className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                    {
+                        Object.keys(Class).map((value) => {
+                            console.log(value)
+                            return (<option>{value}</option>)
+                        })
+                    }
+                </select>
+            </label>
+            <label className="block">
+                <span>Number</span>
+                <input type="number" max={300} min={0} onChange={(e) => { setLevel(parseInt(e.target!.value)) }} value={level} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+            </label>
+            <button onClick={() => {
                 dispatch(addChar({ name, level, class: job }))
-            }}>Add</StyledSubmitButton>
+            }} 
+            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5">
+                Add
+            </button>
         </StyledForm>
     )
 }

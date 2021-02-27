@@ -26,27 +26,11 @@ const StyledDialog = styled.div`
     flex-direction: column;
     transform: translate(-50%, -50%);
     background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-width: 500px;
+    min-width: 400px;
     max-width: 100%; 
-    min-height: 500px;
+    min-height: 400px;
     border-radius: 8px;
     border: 1px solid black;
-`;
-
-const StyledExitButton = styled.button`
-    position: absolute;
-    height: 35px;
-    width: 35px;
-    border: none;
-    background-color: rgb(0,0,0,0);
-    right: 0;
-    cursor: pointer;
-    filter: brightness(0) invert(1);
-`;
-
-const StyledExitIcon = styled.img`
-    height: auto;
-    width: 100%;
 `;
 
 const StyledHeader = styled.div`
@@ -56,16 +40,6 @@ const StyledHeader = styled.div`
     font-size: 28px;
     font-family: Montserrat;
     padding: 1rem;
-`;
-
-const StyledErrorDiv = styled.div`
-    background-color: white;
-    height: calc(100% - 70px);
-    z-index: 3;
-    position: absolute;
-    width: 100%;
-    top: 70px;
-    text-align: center;
 `;
 
 const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
@@ -97,9 +71,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
         <StyledContainer>
             <StyledDialog>
                 <StyledHeader>{header}</StyledHeader>
-                <StyledExitButton onClick={() => setDialogOpen(false)}>
-                    <StyledExitIcon src={`${process.env.PUBLIC_URL}/exit.svg`} />
-                </StyledExitButton>
+                    <img onClick={() => setDialogOpen(false)} src="/exit.svg" className="absolute top-0 right-0 h-4 w-4 m-3" alt="exit"/>
                 {renderContent()}
             </StyledDialog>
         </StyledContainer>
