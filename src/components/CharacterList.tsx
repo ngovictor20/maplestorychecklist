@@ -3,11 +3,13 @@ import { setCharIndex, updateCharList } from 'redux/stateSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
 import sampleCharacterList from 'config/sampleData';
+import useDialog from 'components/Dialog/useDialog';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(state => state.characters);
     const charIndex = useAppSelector(state => state.characterIndex);
     const dispatch = useAppDispatch();
+    const { renderDialog, setDialogOpen, dialogOpen } = useDialog();
     console.log(charList, charIndex);
     useEffect(() => {
         const list = localStorage.getItem("characters");
@@ -20,6 +22,7 @@ const CharacterList: React.FC = () => {
 
     return (
         <div>
+            {renderDialog("addCharacter")}
             <div>
                 {charList && charList.map((char, index) => (
                     <div onClick={
@@ -34,6 +37,9 @@ const CharacterList: React.FC = () => {
                     </div>
                 ))}
             </div>
+            <button onClick={()=>{setDialogOpen(!dialogOpen)}}>
+                    Add Character
+            </button>
         </div>
     )
 }

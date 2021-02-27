@@ -42,7 +42,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
             <label htmlFor="class">Class</label>
             <input type="text" name="class" onChange={(e) => { setJob(Class[e.target!.value! as keyof typeof Class]) }} ></input>
             <label htmlFor="level">Level</label>
-            <StyledTextArea name="level" onChange={(e) => { setLevel(parseInt(e.target!.value)) }} />
+            <input type="number" max={300} min={0} name="level" onChange={(e) => { setLevel(parseInt(e.target!.value)) }} value={level}/>
             <StyledSubmitButton onClick={() => {
                 dispatch(addChar({ name, level, class: job }))
             }}>Add</StyledSubmitButton>
