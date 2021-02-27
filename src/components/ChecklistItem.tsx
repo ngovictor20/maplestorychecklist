@@ -12,11 +12,13 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ field, value }) => {
 
     return (
         <div key={field}>
+            <label className="inline-flex items-center h-14">
             <input type="checkbox" className="rounded text-pink-500" checked={checked} onChange={(e) => {
                 dispatch(updateChecklistItem({field, type: "dailyChecklist"}))
                 setChecked(e.target.checked);
             }} />
-            <label>{field}</label>
+            <span className="ml-2">{field}</span>
+            </label>
         </div>
     )
 }

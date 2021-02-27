@@ -7,10 +7,8 @@ import useDialog from 'components/Dialog/useDialog';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(state => state.characters);
-    const charIndex = useAppSelector(state => state.characterIndex);
     const dispatch = useAppDispatch();
     const { renderDialog, setDialogOpen, dialogOpen } = useDialog();
-    console.log(charList, charIndex);
     useEffect(() => {
         const list = localStorage.getItem("characters");
         if (isEmpty(list)) {
@@ -37,7 +35,7 @@ const CharacterList: React.FC = () => {
                     </div>
                 ))}
             </div>
-            <div className="col-start-4" onClick={()=>{setDialogOpen(!dialogOpen)}}>
+            <div className="col-start-4" onClick={() => { setDialogOpen(!dialogOpen) }}>
                 Add Character
             </div>
         </div>

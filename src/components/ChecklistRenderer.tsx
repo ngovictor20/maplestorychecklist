@@ -13,7 +13,7 @@ const ChecklistRenderer: React.FC<ChecklistProps> = ({ checklist }) => {
             {
                 Object.entries(checklist).map(([field, value]) => {
                     return (
-                        <ChecklistItem {...{field,value}}></ChecklistItem>
+                        <ChecklistItem {...{field,value}} key={field}></ChecklistItem>
                     )
                 })
             }
