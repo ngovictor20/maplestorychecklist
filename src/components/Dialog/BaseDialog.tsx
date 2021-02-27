@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
+import AddCharacterDialog from './AddCharacterDialog';
 
 interface DialogProps {
     setDialogOpen: (arg: boolean) => void;
@@ -86,6 +87,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
     const renderContent = () => {
         switch (type) {
             case "addCharacter":
+                return <AddCharacterDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading}/>
             default:
                 break;
         }
