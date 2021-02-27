@@ -4,9 +4,11 @@ import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
 import sampleCharacterList from 'config/sampleData';
 import useDialog from 'components/Dialog/useDialog';
+import CharacterCard from './CharacterCard';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(state => state.characters);
+    const charIndex = useAppSelector(state => state.characterIndex);
     const dispatch = useAppDispatch();
     const { renderDialog, setDialogOpen, dialogOpen } = useDialog();
     useEffect(() => {
@@ -21,21 +23,12 @@ const CharacterList: React.FC = () => {
     return (
         <div className="grid grid-rows-1 grid-cols-2">
             {renderDialog("addCharacter")}
-            <div className="flex">
+            <div className="flex items-center py-5 gap-x-4">
                 {charList && charList.map((char, index) => (
-                    <div onClick={
-                        () => {
-                            dispatch(setCharIndex(index));
-                        }
-                    } key={char.name}>
-                        <p>
-                            {char.name}
-                            {char.class}
-                        </p>
-                    </div>
+                    <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex }} />
                 ))}
             </div>
-            
+
             <button onClick={() => { setDialogOpen(!dialogOpen) }} className="col-start-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5 w-40 place-self-end self-start">
                 Add Character
             </button>

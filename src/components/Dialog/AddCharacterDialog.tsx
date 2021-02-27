@@ -37,7 +37,6 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
                 <select onChange={(e) => { setJob(Class[e.target!.value! as keyof typeof Class]) }} className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
                     {
                         Object.keys(Class).map((value) => {
-                            console.log(value)
                             return (<option>{value}</option>)
                         })
                     }
