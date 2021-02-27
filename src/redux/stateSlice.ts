@@ -32,7 +32,8 @@ export const stateSlice = createSlice({
     },
     addChar:(state, action: PayloadAction<Character>)=>{
       state.characters.push(action.payload);
-      localStorage.setItem("character",JSON.stringify(current(state).characters));
+      console.log(current(state).characters);
+      localStorage.setItem("characters",JSON.stringify(current(state).characters));
     },
     setCharIndex: (state, action: PayloadAction<number>) => {
       const storage = JSON.parse(

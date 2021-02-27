@@ -4,7 +4,6 @@ import { useAppSelector } from 'redux/hooks';
 
 const WeekliesPage = () => {
     const {weeklyBosses} = useAppSelector(state=>state.checklist);
-    console.log(weeklyBosses)
     return (
         <div>
              <ChecklistRenderer checklist={weeklyBosses}/>

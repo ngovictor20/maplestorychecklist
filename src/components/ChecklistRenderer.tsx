@@ -11,7 +11,6 @@ const ChecklistRenderer: React.FC<ChecklistProps> = ({ checklist }) => {
             <p>{JSON.stringify(checklist)}</p>
             {
                 Object.entries(checklist).map(([item, value]) => {
-                    console.log(item,value);
                     return (
                     <div key={item}>
                         <input type="checkbox" className="rounded text-pink-500" checked={value} />
