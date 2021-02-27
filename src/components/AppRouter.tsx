@@ -15,21 +15,23 @@ const AppRouter = () => {
             <Provider store={store}>
                 <Router>
                     <Header />
-                    <CharacterList />
-                    <Switch>
-                        <Route exact path="/">
-                            <LandingPage />
-                        </Route>
-                        <Route exact path="/dailies">
-                            <DailiesPage />
-                        </Route>
-                        <Route exact path="/weeklies">
-                            <WeekliesPage />
-                        </Route>
-                        <Route exact path="/quiche">
-                            <ShiftPage />
-                        </Route>
-                    </Switch>
+                    <div className="lg:z-50 max-w-8xl px-36 container min-w-full h-screen">
+                        <CharacterList />
+                        <Switch>
+                            <Route exact path="/">
+                                <LandingPage />
+                            </Route>
+                            <Route exact path="/dailies">
+                                <DailiesPage />
+                            </Route>
+                            <Route exact path="/weeklies">
+                                <WeekliesPage />
+                            </Route>
+                            <Route exact path="/quiche">
+                                <ShiftPage />
+                            </Route>
+                        </Switch>
+                    </div>
                 </Router>
             </Provider>
         </div>
