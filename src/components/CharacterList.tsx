@@ -19,7 +19,7 @@ const CharacterList: React.FC = () => {
     }, [])
 
     return (
-        <div className="grid grid-rows-1 grid-cols-4">
+        <div className="grid grid-rows-1 grid-cols-2">
             {renderDialog("addCharacter")}
             <div className="flex">
                 {charList && charList.map((char, index) => (
@@ -35,9 +35,10 @@ const CharacterList: React.FC = () => {
                     </div>
                 ))}
             </div>
-            <div className="col-start-4" onClick={() => { setDialogOpen(!dialogOpen) }}>
+            
+            <button onClick={() => { setDialogOpen(!dialogOpen) }} className="col-start-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5 w-40 place-self-end self-start">
                 Add Character
-            </div>
+            </button>
         </div>
     )
 }
