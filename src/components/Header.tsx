@@ -10,13 +10,13 @@ const Header = () => {
             <p className="text-xl">
                 Maplelist
             </p>
-            <Link to="/dailies" className="text-lg ml-20">
+            <Link to="/dailies" className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-20">
                 Dailies
             </Link>
-            <Link to="/weeklies" className="text-lg ml-5">
+            <Link to="/weeklies" className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-5">
                 Weeklies
             </Link>
-            <Link to="/quiche" className="text-lg ml-5">
+            <Link to="/quiche" className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-5">
                 Quiche
             </Link>
         </div>

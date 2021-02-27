@@ -12,6 +12,7 @@ const ChecklistRenderer: React.FC<ChecklistProps> = ({ checklist }) => {
             <p>{JSON.stringify(checklist)}</p>
             {
                 Object.entries(checklist).map(([field, value]) => {
+                    console.log(value);
                     return (
                         <ChecklistItem {...{field,value}} key={field}></ChecklistItem>
                     )
