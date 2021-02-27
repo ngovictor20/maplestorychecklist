@@ -1,10 +1,9 @@
 import React from 'react'
-import checklist from 'config/checklists';
 import ChecklistRenderer from 'components/ChecklistRenderer';
+import {useAppSelector, useAppDispatch} from 'redux/hooks';
 
 const DailiesPage = () => {
-    const dailyChecklist = checklist.dailyChecklist;
-
+    const { dailyChecklist } = useAppSelector(state=>state.checklist);
     return (
         <div>
             <ChecklistRenderer checklist={dailyChecklist}/>

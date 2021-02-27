@@ -1,10 +1,10 @@
 import React from 'react'
-import checklist from 'config/checklists';
 import ChecklistRenderer from 'components/ChecklistRenderer';
+import { useAppSelector } from 'redux/hooks';
 
 const WeekliesPage = () => {
-    const weeklyBosses = checklist.weeklyBosses;
-
+    const {weeklyBosses} = useAppSelector(state=>state.checklist);
+    console.log(weeklyBosses)
     return (
         <div>
              <ChecklistRenderer checklist={weeklyBosses}/>

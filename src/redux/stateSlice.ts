@@ -33,18 +33,18 @@ export const stateSlice = createSlice({
     addChar:(state, action: PayloadAction<Character>)=>{
       state.characters.push(action.payload);
     },
-    setCharIndex: (state, action) => {
+    setCharIndex: (state, action: PayloadAction<number>) => {
       const storage = JSON.parse(
       //@ts-ignore
-        localStorage.getItem(state.characters[state.characterIndex])
+        localStorage.getItem(state.characters[action.payload].name)
       );
       if (!isEmpty(storage)) {
         state.checklist = storage;
-        console.log(state.checklist);
+        console.log(current(state).checklist)
       } else {
-        console.log("Hello");
+        console.log("empty");
+        localStorage.setItem(state.characters[action.payload].name, JSON.stringify(checklist));
         state.checklist = checklist;
-        console.log(current(state).checklist);
       }
       state.characterIndex = action.payload;
     },

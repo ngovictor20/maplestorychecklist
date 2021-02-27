@@ -7,6 +7,7 @@ import Header from 'components/Header';
 import CharacterList from 'components/CharacterList';
 import { Provider } from 'react-redux';
 import store from 'redux/store';
+import ShiftPage from 'pages/ShiftPage';
 
 const AppRouter = () => {
     return (
@@ -26,7 +27,7 @@ const AppRouter = () => {
                             <WeekliesPage />
                         </Route>
                         <Route exact path="/quiche">
-                            <p>quiche</p>
+                            <ShiftPage />
                         </Route>
                     </Switch>
                 </Router>

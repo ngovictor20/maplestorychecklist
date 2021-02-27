@@ -75,16 +75,21 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
 
     useEffect(() => {
         switch (type) {
-            case "musicAdd":
-                setHeader("Add Music");
-                break;
-            case "pictureAdd":
-                setHeader("Add Picture");
+            case "addCharacter":
+                setHeader("Add Character");
                 break;
             default:
                 break;
         }
     }, [type])
+
+    const renderContent = () => {
+        switch (type) {
+            case "addCharacter":
+            default:
+                break;
+        }
+    }
 
     return (
         <StyledContainer>
@@ -93,6 +98,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
                 <StyledExitButton onClick={() => setDialogOpen(false)}>
                     <StyledExitIcon src={`${process.env.PUBLIC_URL}/exit.svg`} />
                 </StyledExitButton>
+                {renderContent()}
             </StyledDialog>
         </StyledContainer>
     )
