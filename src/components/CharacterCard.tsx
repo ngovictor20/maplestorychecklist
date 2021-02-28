@@ -2,18 +2,18 @@ import React from 'react'
 import { useAppDispatch } from 'redux/hooks';
 import { setCharIndex } from 'redux/stateSlice';
 import { Class } from 'types'
+import { DialogType } from './Dialog/types';
 interface CharacterProps {
     name: string;
     className: Class;
     level: number;
     index: number;
     selected?: boolean;
-    setDialogOpen: (state: boolean)=>void;
-    dialogOpen: boolean;
+    toggleDialog: (type: DialogType)=>void;
 }
 
 
-const CharacterCard: React.FC<CharacterProps> = ({ className, level, name, index, selected, setDialogOpen, dialogOpen }) => {
+const CharacterCard: React.FC<CharacterProps> = ({ className, level, name, index, selected, toggleDialog }) => {
     const dispatch = useAppDispatch();
 
     return (
@@ -23,7 +23,7 @@ const CharacterCard: React.FC<CharacterProps> = ({ className, level, name, index
                 <p>{name}</p>
                 <p>{level}</p>
             </div>
-            <img onClick={() => {setDialogOpen(!dialogOpen)}} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`absolute top-0 right-0 h-2 w-2 m-1 hover:bg-blue-200 ${selected ? "":""}`} alt="exit"/>
+            <img onClick={() => {toggleDialog(DialogType.deleteCharacter)}} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`absolute top-0 right-0 h-2 w-2 m-1 hover:bg-blue-200 ${selected ? "":""}`} alt="exit"/>
         </div>
     )
 }

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
-import AddCharacterDialog from './AddCharacterDialog';
-import ConfirmDeleteDialog from './ConfirmDeleteDialog';
+import AddCharacterDialog from 'components/Dialog/AddCharacterDialog';
+import ConfirmDeleteDialog from 'components/Dialog/ConfirmDeleteDialog';
+import { DialogType } from 'components/Dialog/types';
 
 interface DialogProps {
     setDialogOpen: (arg: boolean) => void;
-    type: string;
+    type: DialogType;
 }
 
 const StyledContainer = styled.div`
@@ -51,10 +52,10 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
 
     useEffect(() => {
         switch (type) {
-            case "addCharacter":
+            case DialogType.addCharacter:
                 setHeader("Add Character");
                 break;
-            case "deleteCharacter":
+            case DialogType.deleteCharacter:
                 setHeader("Confirm");
                 break;
             default:
@@ -64,9 +65,9 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
 
     const renderContent = () => {
         switch (type) {
-            case "addCharacter":
+            case DialogType.addCharacter:
                 return <AddCharacterDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading} />
-            case "deleteCharacter":
+            case DialogType.deleteCharacter:
                 return <ConfirmDeleteDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading} ></ConfirmDeleteDialog>
             default:
                 break;

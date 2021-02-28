@@ -4,12 +4,13 @@ import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
 import useDialog from 'components/Dialog/useDialog';
 import CharacterCard from './CharacterCard';
+import { DialogType } from './Dialog/types';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(state => state.characters);
     const charIndex = useAppSelector(state => state.characterIndex);
     const dispatch = useAppDispatch();
-    const { renderDialog, setDialogOpen, dialogOpen } = useDialog();
+    const { renderDialog, toggleDialog } = useDialog();
 
     const checkIfLastVisitedExpired = () => {
         const loginDate = new Date();
@@ -42,15 +43,13 @@ const CharacterList: React.FC = () => {
 
     return (
         <div className="grid grid-rows-1 grid-cols-2">
-            {renderDialog("deleteCharacter")}
-            {renderDialog("addCharacter")}
+            {renderDialog()}
             <div className="flex items-center py-5 gap-x-4">
                 {charList && charList.map((char, index) => (
-                    <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex, setDialogOpen, dialogOpen }} key={char.name} />
+                    <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex, toggleDialog }} key={char.name} />
                 ))}
             </div>
-
-            <button onClick={() => { setDialogOpen(!dialogOpen) }} className="col-start-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5 w-40 place-self-end self-start">
+            <button onClick={() => { toggleDialog(DialogType.addCharacter) }} className="col-start-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5 w-40 place-self-end self-start">
                 Add Character
             </button>
         </div>

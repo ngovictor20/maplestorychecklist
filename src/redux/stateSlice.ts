@@ -72,10 +72,10 @@ export const stateSlice = createSlice({
         localStorage.setItem(character.name, JSON.stringify({ ...checklist, weeklyBosses: weeklyList, dailyChecklist: dailyList }))
       })
     },
-    setChecklistType: (state, action: PayloadAction<ChecklistType>)=>{
+    setChecklistType: (state, action: PayloadAction<ChecklistType>) => {
       state.checklistType = action.payload;
     },
-    deleteCharacter: (state, action: PayloadAction<number>)=>{
+    deleteCharacter: (state, action: PayloadAction<number>) => {
       const character = state.characters[action.payload];
       localStorage.removeItem(character.name);
       state.characters.splice(action.payload, 1);
