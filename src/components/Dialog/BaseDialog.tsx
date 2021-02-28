@@ -1,57 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
-import AddCharacterDialog from './AddCharacterDialog';
+import AddCharacterDialog from 'components/Dialog/AddCharacterDialog';
+import ConfirmDeleteDialog from 'components/Dialog/ConfirmDialog';
+import { DialogType } from 'components/Dialog/types';
+import { deleteCharacter } from 'redux/stateSlice';
+import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
 interface DialogProps {
     setDialogOpen: (arg: boolean) => void;
-    type: string;
+    type: DialogType;
 }
 
-const StyledContainer = styled.div`
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(0,0,0,0.7);
-    z-index: 3;
-    top: 0;
-    left: 0;
-    
-`;
-
-const StyledDialog = styled.div`
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    display: flex;
-    flex-direction: column;
-    transform: translate(-50%, -50%);
-    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-width: 400px;
-    max-width: 100%; 
-    min-height: 400px;
-    border-radius: 8px;
-    border: 1px solid black;
-`;
-
-const StyledHeader = styled.div`
-    border-radius: 5px 5px 0 0;
-    padding-left: 5px;
-    text-align: center;
-    font-size: 28px;
-    font-family: Montserrat;
-    padding: 1rem;
-`;
 
 const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
     const [header, setHeader] = useState("Dialog");
     const [isError, setIsError] = useState(false);
     const [errorMsg, setErrorMsg] = useState("");
     const [isLoading, setIsLoading] = useState(false);
+    const charIndex = useAppSelector(state => state.characterIndex);
+    const dispatch = useAppDispatch();
 
     useEffect(() => {
         switch (type) {
-            case "addCharacter":
+            case DialogType.addCharacter:
                 setHeader("Add Character");
+                break;
+            case DialogType.deleteCharacter | DialogType.deleteStorage:
+                setHeader("Confirm Action");
                 break;
             default:
                 break;
@@ -60,21 +34,40 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
 
     const renderContent = () => {
         switch (type) {
-            case "addCharacter":
-                return <AddCharacterDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading}/>
+            case DialogType.addCharacter:
+                return <AddCharacterDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading} />
+            case DialogType.deleteCharacter:
+                return <ConfirmDeleteDialog {...{
+                    setIsError, setErrorMsg, setIsLoading,
+                    confirmMessage: "Are you sure you want to delete this character?",
+                    onConfirm: () => {
+                        dispatch(deleteCharacter(charIndex));
+                        setDialogOpen(false);
+                    }
+                }} ></ConfirmDeleteDialog>
+            case DialogType.deleteStorage:
+                return <ConfirmDeleteDialog {...{
+                    setIsError, setErrorMsg, setIsLoading,
+                    confirmMessage: "Are you sure you want to wipe your character data?",
+                    onConfirm: () => {
+                        localStorage.clear();
+                        setDialogOpen(false);
+                        window.location.reload();
+                    }
+                }} ></ConfirmDeleteDialog>
             default:
                 break;
         }
     }
 
     return (
-        <StyledContainer>
-            <StyledDialog>
-                <StyledHeader>{header}</StyledHeader>
-                    <img onClick={() => setDialogOpen(false)} src={`${process.env.PUBLIC_URL}/exit.svg`} className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200" alt="exit"/>
+        <div className="fixed h-full w-screen z-50 inset-0 bg-gray-300 bg-opacity-75 flex justify-center items-center" >
+            <span className="relative inset-0 flex flex-col bg-white max-w-1/2 min-w-1/4 max-h-full rounded-lg text-black">
+                <p className="underline text-center h-18 text-2xl font-bold p-5">{header}</p>
+                <img onClick={() => setDialogOpen(false)} src={`${process.env.PUBLIC_URL}/exit.svg`} className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200" alt="exit" />
                 {renderContent()}
-            </StyledDialog>
-        </StyledContainer>
+            </span>
+        </div>
     )
 }
 

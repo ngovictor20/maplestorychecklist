@@ -55,7 +55,8 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
                 }} value={level} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
             </label>
             <button onClick={() => {
-                dispatch(addChar({ name, level, class: job }))
+                dispatch(addChar({ name, level, class: job }));
+                setDialogOpen(false);
             }}
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5">
                 Add
