@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import styled from 'styled-components';
 import AddCharacterDialog from 'components/Dialog/AddCharacterDialog';
 import ConfirmDeleteDialog from 'components/Dialog/ConfirmDeleteDialog';
 import { DialogType } from 'components/Dialog/types';
@@ -9,40 +8,6 @@ interface DialogProps {
     type: DialogType;
 }
 
-const StyledContainer = styled.div`
-    position: fixed;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(0,0,0,0.7);
-    z-index: 3;
-    top: 0;
-    left: 0;
-    
-`;
-
-const StyledDialog = styled.div`
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    display: flex;
-    flex-direction: column;
-    transform: translate(-50%, -50%);
-    background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    min-width: 400px;
-    max-width: 100%; 
-    min-height: 400px;
-    border-radius: 8px;
-    border: 1px solid black;
-`;
-
-const StyledHeader = styled.div`
-    border-radius: 5px 5px 0 0;
-    padding-left: 5px;
-    text-align: center;
-    font-size: 28px;
-    font-family: Montserrat;
-    padding: 1rem;
-`;
 
 const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
     const [header, setHeader] = useState("Dialog");
@@ -75,13 +40,13 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
     }
 
     return (
-        <StyledContainer>
-            <StyledDialog>
-                <StyledHeader>{header}</StyledHeader>
+        <div className="fixed h-full w-screen z-50 inset-0 bg-gray-300 bg-opacity-75 flex justify-center items-center" >
+            <span className="relative inset-0 flex flex-col bg-white w-1/2 max-h-1/2 rounded-lg">
+                <p className="underline text-center h-18 text-2xl font-bold p-5">{header}</p>
                 <img onClick={() => setDialogOpen(false)} src={`${process.env.PUBLIC_URL}/exit.svg`} className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200" alt="exit" />
                 {renderContent()}
-            </StyledDialog>
-        </StyledContainer>
+            </span>
+        </div>
     )
 }
 

@@ -1,6 +1,4 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
-import { Class } from 'types';
+import React  from 'react';
 import { deleteCharacter } from 'redux/stateSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 
@@ -11,31 +9,23 @@ interface DialogProps {
     setErrorMsg: (arg: string) => void;
 }
 
-const StyledForm = styled.div`
-    display: flex;
-    position: relative;
-    flex-direction: column; 
-    width: 60%;
-    left: 50%;
-    transform: translate(-50%, 0%);
-`;
 
 const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, setIsError, setErrorMsg }) => {
     const charIndex = useAppSelector(state => state.characterIndex);
     const dispatch = useAppDispatch();
 
     return (
-        <StyledForm>
-            <h1>
+        <div className="flex flex-col relative px-12 h-full content-center">
+            <p className="text-2xl self-center text-center">
                 Are you sure you want to delete this character?
-            </h1>
+            </p>
             <button onClick={() => {
                 dispatch(deleteCharacter(charIndex));
             }}
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5">
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5 cursor-pointer">
                 Confirm
             </button>
-        </StyledForm>
+        </div>
     )
 }
 
