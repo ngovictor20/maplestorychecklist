@@ -13,13 +13,13 @@ const Header = () => {
             <p className="text-xl">
                 Maplelist
             </p>
-            <div onClick={()=>{dispatch(setChecklistType(ChecklistType.dailyChecklist))}} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-20">
+            <div onClick={() => { dispatch(setChecklistType(ChecklistType.dailyChecklist)) }} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-20">
                 Dailies
             </div>
-            <div onClick={()=>{dispatch(setChecklistType(ChecklistType.weeklyBosses))}} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-5">
+            <div onClick={() => { dispatch(setChecklistType(ChecklistType.weeklyBosses)) }} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-5">
                 Weeklies
             </div>
-            <div onClick={()=>{dispatch(setChecklistType(ChecklistType.shiftChecklist))}} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-5">
+            <div onClick={() => { dispatch(setChecklistType(ChecklistType.shiftChecklist)) }} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-5">
                 Quiche
             </div>
         </div>
