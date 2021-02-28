@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/maplestorychecklist/static/css/main.f730aef1.chunk.css",
-    "main.js": "/maplestorychecklist/static/js/main.dfc47f48.chunk.js",
-    "main.js.map": "/maplestorychecklist/static/js/main.dfc47f48.chunk.js.map",
+    "main.js": "/maplestorychecklist/static/js/main.8a4804ed.chunk.js",
+    "main.js.map": "/maplestorychecklist/static/js/main.8a4804ed.chunk.js.map",
     "runtime-main.js": "/maplestorychecklist/static/js/runtime-main.769e215c.js",
     "runtime-main.js.map": "/maplestorychecklist/static/js/runtime-main.769e215c.js.map",
     "static/js/2.437b54fd.chunk.js": "/maplestorychecklist/static/js/2.437b54fd.chunk.js",
@@ -15,6 +15,6 @@
     "static/js/runtime-main.769e215c.js",
     "static/js/2.437b54fd.chunk.js",
     "static/css/main.f730aef1.chunk.css",
-    "static/js/main.dfc47f48.chunk.js"
+    "static/js/main.8a4804ed.chunk.js"
   ]
 }
