@@ -67,7 +67,8 @@ export const stateSlice = createSlice({
     resetWeeklyChecklists: (state) => {
       state.characters.forEach((character) => {
         const weeklyList = checklist.weeklyBosses;
-        localStorage.setItem(character.name, JSON.stringify({ ...checklist, weeklyBosses: weeklyList }))
+        const dailyList = checklist.dailyChecklist;
+        localStorage.setItem(character.name, JSON.stringify({ ...checklist, weeklyBosses: weeklyList, dailyChecklist: dailyList }))
       })
     }
   },

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { setCharIndex, updateCharList } from 'redux/stateSlice';
+import { setCharIndex, updateCharList, resetDailyChecklists, resetWeeklyChecklists } from 'redux/stateSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
 import sampleCharacterList from 'config/sampleData';
@@ -11,7 +11,29 @@ const CharacterList: React.FC = () => {
     const charIndex = useAppSelector(state => state.characterIndex);
     const dispatch = useAppDispatch();
     const { renderDialog, setDialogOpen, dialogOpen } = useDialog();
+
+    const checkIfLastVisitedExpired = () => {
+        const loginDate = new Date();
+        const lastCheckedDate = localStorage.getItem("lastVisited");
+        //if its daily expiry
+        if (lastCheckedDate && (loginDate.getHours() > 19 && new Date(lastCheckedDate) < loginDate)) {
+            console.log("Daily check passed");
+            //check if its weekly expired
+            if (loginDate.getDay() === 0) {
+                console.log("week check passed");
+                dispatch(resetWeeklyChecklists());
+            }else{
+                console.log("weeklycheck failed")
+                dispatch(resetDailyChecklists());
+            }
+        }else{
+            dispatch(resetDailyChecklists());
+        }
+        localStorage.setItem("lastVisited", loginDate.toISOString());
+    }
+
     useEffect(() => {
+        checkIfLastVisitedExpired();
         const list = localStorage.getItem("characters");
         if (isEmpty(list)) {
             localStorage.setItem('characters', JSON.stringify(sampleCharacterList));
