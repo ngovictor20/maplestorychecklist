@@ -1,4 +1,5 @@
 export enum DialogType{
     deleteCharacter,
-    addCharacter
+    addCharacter,
+    deleteStorage,
 }
