@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components';
 import AddCharacterDialog from './AddCharacterDialog';
+import ConfirmDeleteDialog from './ConfirmDeleteDialog';
 
 interface DialogProps {
     setDialogOpen: (arg: boolean) => void;
@@ -53,6 +54,9 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
             case "addCharacter":
                 setHeader("Add Character");
                 break;
+            case "deleteCharacter":
+                setHeader("Confirm");
+                break;
             default:
                 break;
         }
@@ -61,7 +65,9 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
     const renderContent = () => {
         switch (type) {
             case "addCharacter":
-                return <AddCharacterDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading}/>
+                return <AddCharacterDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading} />
+            case "deleteCharacter":
+                return <ConfirmDeleteDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading} ></ConfirmDeleteDialog>
             default:
                 break;
         }
@@ -71,7 +77,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
         <StyledContainer>
             <StyledDialog>
                 <StyledHeader>{header}</StyledHeader>
-                    <img onClick={() => setDialogOpen(false)} src={`${process.env.PUBLIC_URL}/exit.svg`} className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200" alt="exit"/>
+                <img onClick={() => setDialogOpen(false)} src={`${process.env.PUBLIC_URL}/exit.svg`} className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200" alt="exit" />
                 {renderContent()}
             </StyledDialog>
         </StyledContainer>

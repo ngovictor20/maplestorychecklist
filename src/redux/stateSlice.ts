@@ -75,6 +75,12 @@ export const stateSlice = createSlice({
     setChecklistType: (state, action: PayloadAction<ChecklistType>)=>{
       state.checklistType = action.payload;
     },
+    deleteCharacter: (state, action: PayloadAction<number>)=>{
+      const character = state.characters[action.payload];
+      localStorage.removeItem(character.name);
+      state.characters.splice(action.payload, 1);
+      localStorage.setItem('characters', JSON.stringify(current(state).characters));
+    }
   },
 });
 
@@ -86,7 +92,8 @@ export const {
   updateChecklistItem,
   resetDailyChecklists,
   resetWeeklyChecklists,
-  setChecklistType
+  setChecklistType,
+  deleteCharacter
 } = stateSlice.actions;
 
 export const selectChecklist = (state: RootState) => state.checklist;

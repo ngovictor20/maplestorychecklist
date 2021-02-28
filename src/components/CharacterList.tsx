@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { setCharIndex, updateCharList, resetDailyChecklists, resetWeeklyChecklists } from 'redux/stateSlice';
+import { updateCharList, resetDailyChecklists, resetWeeklyChecklists } from 'redux/stateSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
 import useDialog from 'components/Dialog/useDialog';
@@ -22,11 +22,11 @@ const CharacterList: React.FC = () => {
             if (loginDate.getDay() === 0) {
                 console.log("week check passed");
                 dispatch(resetWeeklyChecklists());
-            }else{
+            } else {
                 console.log("weeklycheck failed")
                 dispatch(resetDailyChecklists());
             }
-        }else{
+        } else {
             dispatch(resetDailyChecklists());
         }
         localStorage.setItem("lastVisited", loginDate.toISOString());
@@ -42,10 +42,11 @@ const CharacterList: React.FC = () => {
 
     return (
         <div className="grid grid-rows-1 grid-cols-2">
+            {renderDialog("deleteCharacter")}
             {renderDialog("addCharacter")}
             <div className="flex items-center py-5 gap-x-4">
                 {charList && charList.map((char, index) => (
-                    <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex }} key={char.name}/>
+                    <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex, setDialogOpen, dialogOpen }} key={char.name} />
                 ))}
             </div>
 
