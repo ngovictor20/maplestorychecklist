@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 import { setCharIndex, updateCharList, resetDailyChecklists, resetWeeklyChecklists } from 'redux/stateSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
-import sampleCharacterList from 'config/sampleData';
 import useDialog from 'components/Dialog/useDialog';
 import CharacterCard from './CharacterCard';
 
@@ -36,9 +35,7 @@ const CharacterList: React.FC = () => {
     useEffect(() => {
         checkIfLastVisitedExpired();
         const list = localStorage.getItem("characters");
-        if (isEmpty(list)) {
-            localStorage.setItem('characters', JSON.stringify(sampleCharacterList));
-        } else {
+        if (!isEmpty(list)) {
             dispatch(updateCharList(JSON.parse(list!.toString())))
         }
     }, [])

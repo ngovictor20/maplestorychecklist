@@ -7,6 +7,12 @@ interface Character {
   level: number;
 }
 
+enum ChecklistType{
+  dailyChecklist = "dailyChecklist",
+  weeklyBosses = "weeklyBosses",
+  shiftChecklist = "shiftChecklist",
+}
+
 interface FullChecklist {
   dailyChecklist: Checklist;
   weeklyBosses: Checklist;
@@ -22,4 +28,4 @@ enum Class {
 }
 
 export type { Checklist, Character, FullChecklist };
-export { Class };
+export { Class, ChecklistType };

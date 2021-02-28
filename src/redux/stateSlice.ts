@@ -1,18 +1,18 @@
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import checklist from "config/checklists";
 import { isEmpty } from "lodash";
-import { Character, FullChecklist } from "types";
+import { Character, ChecklistType, FullChecklist } from "types";
 import { RootState } from "./store";
 
 interface IState {
   characters: Array<Character>;
   characterIndex: number;
   checklist: FullChecklist;
+  checklistType: ChecklistType;
 }
 
 interface checklistUpdateData {
   field: string;
-  type: "weeklyBosses" | "dailyChecklist" | "shiftChecklist";
 }
 
 const initialState: IState = {
@@ -23,6 +23,7 @@ const initialState: IState = {
   },
   characters: [],
   characterIndex: 0,
+  checklistType: ChecklistType.dailyChecklist,
 }
 
 export const stateSlice = createSlice({
@@ -41,7 +42,7 @@ export const stateSlice = createSlice({
       localStorage.setItem("characters", JSON.stringify(current(state).characters));
     },
     updateChecklistItem: (state, action: PayloadAction<checklistUpdateData>) => {
-      state.checklist[action.payload.type][action.payload.field] = !state.checklist[action.payload.type][action.payload.field];
+      state.checklist[state.checklistType][action.payload.field] = !state.checklist[state.checklistType][action.payload.field];
       localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     },
     setCharIndex: (state, action: PayloadAction<number>) => {
@@ -70,7 +71,10 @@ export const stateSlice = createSlice({
         const dailyList = checklist.dailyChecklist;
         localStorage.setItem(character.name, JSON.stringify({ ...checklist, weeklyBosses: weeklyList, dailyChecklist: dailyList }))
       })
-    }
+    },
+    setChecklistType: (state, action: PayloadAction<ChecklistType>)=>{
+      state.checklistType = action.payload;
+    },
   },
 });
 
@@ -81,7 +85,8 @@ export const {
   addChar,
   updateChecklistItem,
   resetDailyChecklists,
-  resetWeeklyChecklists
+  resetWeeklyChecklists,
+  setChecklistType
 } = stateSlice.actions;
 
 export const selectChecklist = (state: RootState) => state.checklist;

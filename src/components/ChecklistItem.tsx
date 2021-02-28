@@ -18,7 +18,7 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ field, value }) => {
             <label className="inline-flex items-center h-8 cursor-pointer">
             <input type="checkbox" className="rounded text-pink-500" checked={checked} onChange={(e) => {
                 setChecked(e.target.checked);
-                dispatch(updateChecklistItem({field, type: "dailyChecklist"}));
+                dispatch(updateChecklistItem({field}));
             }} />
             <span className="ml-2">{field}</span>
             </label>
