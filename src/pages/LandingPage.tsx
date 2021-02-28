@@ -1,18 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
 
 const LandingPage = () => {
     return (
-        <div>
-            <Link to="/dailies">
-                Dailies
-            </Link>
-            <Link to="/weeklies">
-                Weeklies
-            </Link>
-            <Link to="/quiche">
-                Quiche
-            </Link>
+        <div className="text-center">
+            <h1 className="text-4xl">
+                Add a Character!
+            </h1>
         </div>
     )
 }
