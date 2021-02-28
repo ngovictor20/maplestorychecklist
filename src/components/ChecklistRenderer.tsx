@@ -8,7 +8,7 @@ interface ChecklistProps {
 
 const ChecklistRenderer: React.FC<ChecklistProps> = ({ checklist }) => {
     return (
-        <div>
+        <div className="container w-full flex flex-col text-lg">
             {
                 Object.entries(checklist).map(([field, value]) => {
                     return (

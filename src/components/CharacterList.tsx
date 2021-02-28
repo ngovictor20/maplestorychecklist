@@ -15,8 +15,9 @@ const CharacterList: React.FC = () => {
     const checkIfLastVisitedExpired = () => {
         const loginDate = new Date();
         const lastCheckedDate = localStorage.getItem("lastVisited");
+        console.log(loginDate.getHours());
         //if its daily expiry
-        if (lastCheckedDate && (loginDate.getHours() > 19 && new Date(lastCheckedDate) < loginDate)) {
+        if (lastCheckedDate && loginDate.getHours() > 19 && new Date(lastCheckedDate) < loginDate && new Date(lastCheckedDate).getHours() < 19) {
             console.log("Daily check passed");
             //check if its weekly expired
             if (loginDate.getDay() === 0) {
@@ -47,7 +48,7 @@ const CharacterList: React.FC = () => {
             {renderDialog("addCharacter")}
             <div className="flex items-center py-5 gap-x-4">
                 {charList && charList.map((char, index) => (
-                    <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex }} />
+                    <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex }} key={char.name}/>
                 ))}
             </div>
 
