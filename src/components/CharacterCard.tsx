@@ -16,7 +16,7 @@ const CharacterCard: React.FC<CharacterProps> = ({ className, level, name, index
 
     return (
         <div className={`cursor-pointer border-blue-400 border rounded-lg flex items-center ${selected ? "text-white bg-blue-400" : ""}`} onClick={() => dispatch(setCharIndex(index))}>
-            <img className=" w-12 h-12 m-2 rounded-full ring-1 blue-500" src={`/${Class[className]}.svg`} alt={`${Class[className]}`} />
+            <img className=" w-12 h-12 m-2 rounded-full ring-1 blue-500" src={`${process.env.PUBLIC_URL}/${Class[className]}.svg`} alt={`${Class[className]}`} />
             <div className="pr-2">
                 <p>{name}</p>
                 <p>{level}</p>

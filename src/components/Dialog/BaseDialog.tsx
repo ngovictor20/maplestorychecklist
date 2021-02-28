@@ -71,7 +71,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
         <StyledContainer>
             <StyledDialog>
                 <StyledHeader>{header}</StyledHeader>
-                    <img onClick={() => setDialogOpen(false)} src="/exit.svg" className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200" alt="exit"/>
+                    <img onClick={() => setDialogOpen(false)} src={`${process.env.PUBLIC_URL}/exit.svg`} className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200" alt="exit"/>
                 {renderContent()}
             </StyledDialog>
         </StyledContainer>
