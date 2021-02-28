@@ -9,7 +9,7 @@ const useDialog = () => {
 
     return (
         {
-            setDialogOpen, renderDialog
+            setDialogOpen, renderDialog, dialogOpen
         }
     )
 }

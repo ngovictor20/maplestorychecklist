@@ -1,5 +1,6 @@
 import React from 'react';
 import { Checklist } from 'types';
+import ChecklistItem from 'components/ChecklistItem';
 
 interface ChecklistProps {
     checklist: Checklist;
@@ -7,13 +8,12 @@ interface ChecklistProps {
 
 const ChecklistRenderer: React.FC<ChecklistProps> = ({ checklist }) => {
     return (
-        <div>
+        <div className="container w-full flex flex-col text-lg">
             {
-                Object.entries(checklist).map(([item, value]) => {
-                    return (<div key={item}>
-                        <input type="checkbox" className="rounded text-pink-500" defaultChecked={value} />
-                        <label>{item}</label>
-                    </div>)
+                Object.entries(checklist).map(([field, value]) => {
+                    return (
+                        <ChecklistItem {...{field,value}} key={field}></ChecklistItem>
+                    )
                 })
             }
         </div>

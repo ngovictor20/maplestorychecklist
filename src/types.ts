@@ -1,9 +1,25 @@
-interface Checklist{
-    [key: string]: boolean;
+interface Checklist {
+  [key: string]: boolean;
 }
-interface Character{
-    name: string;
-    class: string;
+interface Character {
+  name: string;
+  class: Class;
+  level: number;
 }
 
-export type {Checklist, Character};
+interface FullChecklist {
+  dailyChecklist: Checklist;
+  weeklyBosses: Checklist;
+  shiftChecklist: Checklist;
+}
+
+enum Class {
+  magician = "magician",
+  thief = "thief",
+  warrior = "warrior",
+  bowman = "bowman",
+  pirate = "pirate",
+}
+
+export type { Checklist, Character, FullChecklist };
+export { Class };
