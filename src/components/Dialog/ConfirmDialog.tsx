@@ -10,8 +10,6 @@ interface DialogProps {
 
 
 const ConfirmDialog: React.FC<DialogProps> = ({ setIsLoading, setIsError, setErrorMsg, onConfirm, confirmMessage }) => {
-
-
     return (
         <div className="flex flex-col relative px-12 h-full content-center">
             <p className="text-2xl self-center text-center">

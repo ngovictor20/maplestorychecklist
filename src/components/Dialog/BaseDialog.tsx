@@ -52,6 +52,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
                     onConfirm: () => {
                         localStorage.clear();
                         setDialogOpen(false);
+                        window.location.reload();
                     }
                 }} ></ConfirmDeleteDialog>
             default:
@@ -61,7 +62,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
 
     return (
         <div className="fixed h-full w-screen z-50 inset-0 bg-gray-300 bg-opacity-75 flex justify-center items-center" >
-            <span className="relative inset-0 flex flex-col bg-white max-w-1/2 min-w-1/4 max-h-full rounded-lg">
+            <span className="relative inset-0 flex flex-col bg-white max-w-1/2 min-w-1/4 max-h-full rounded-lg text-black">
                 <p className="underline text-center h-18 text-2xl font-bold p-5">{header}</p>
                 <img onClick={() => setDialogOpen(false)} src={`${process.env.PUBLIC_URL}/exit.svg`} className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200" alt="exit" />
                 {renderContent()}
