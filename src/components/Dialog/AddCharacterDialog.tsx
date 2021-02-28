@@ -30,7 +30,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
         <StyledForm>
             <label className="block">
                 <span>Name</span>
-                <input type="text" onChange={(e) => { setName(e.target!.value) }} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
+                <input type="text" maxLength={12} onChange={(e) => { setName(e.target!.value) }} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
             </label>
             <label className="block">
                 <span>Class</span>
@@ -44,12 +44,20 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
             </label>
             <label className="block">
                 <span>Number</span>
-                <input type="number" max={300} min={0} onChange={(e) => { setLevel(parseInt(e.target!.value)) }} value={level} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                <input type="number" max={300} min={0} onChange={(e) => {
+                    const value = parseInt(e.target.value);
+                    if (value > 300 || value < 0) {
+                        setLevel(0);
+                    } else {
+                        setLevel(value);
+                    }
+                    
+                }} value={level} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
             </label>
             <button onClick={() => {
                 dispatch(addChar({ name, level, class: job }))
-            }} 
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5">
+            }}
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5">
                 Add
             </button>
         </StyledForm>

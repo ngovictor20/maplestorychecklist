@@ -9,7 +9,6 @@ interface ChecklistProps {
 const ChecklistRenderer: React.FC<ChecklistProps> = ({ checklist }) => {
     return (
         <div>
-            <p>{JSON.stringify(checklist)}</p>
             {
                 Object.entries(checklist).map(([field, value]) => {
                     console.log(value);

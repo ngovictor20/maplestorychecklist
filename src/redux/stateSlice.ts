@@ -53,12 +53,23 @@ export const stateSlice = createSlice({
         state.checklist = storage;
         console.log(current(state).checklist)
       } else {
-        console.log("empty");
         localStorage.setItem(state.characters[action.payload].name, JSON.stringify(checklist));
         state.checklist = checklist;
       }
       state.characterIndex = action.payload;
     },
+    resetDailyChecklists: (state) => {
+      state.characters.forEach((character) => {
+        const dailyList = checklist.dailyChecklist;
+        localStorage.setItem(character.name, JSON.stringify({ ...checklist, dailyChecklist: dailyList }))
+      })
+    },
+    resetWeeklyChecklists: (state) => {
+      state.characters.forEach((character) => {
+        const weeklyList = checklist.weeklyBosses;
+        localStorage.setItem(character.name, JSON.stringify({ ...checklist, weeklyBosses: weeklyList }))
+      })
+    }
   },
 });
 
@@ -67,7 +78,9 @@ export const {
   setCharIndex,
   updateCharList,
   addChar,
-  updateChecklistItem
+  updateChecklistItem,
+  resetDailyChecklists,
+  resetWeeklyChecklists
 } = stateSlice.actions;
 
 export const selectChecklist = (state: RootState) => state.checklist;
