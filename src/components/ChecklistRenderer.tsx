@@ -13,8 +13,9 @@ const ChecklistRenderer: React.FC<ChecklistProps> = ({ checklist }) => {
         <div className="container w-full flex flex-col text-lg">
             {
                 Object.entries(checklist).map(([field, value]) => {
-                    if(typeof value === 'object'){
-                        return <SubChecklist checklist={value}/>
+                    console.log(field, typeof value)
+                    if(typeof value !== 'boolean'){
+                        return <SubChecklist label= {field} checklist={value}/>
                     }else{
                         return (
                             <ChecklistItem {...{field,value}} key={field}/>
