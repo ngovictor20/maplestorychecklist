@@ -1,4 +1,6 @@
-const checklist = {
+import { FullChecklist } from "types";
+
+const checklist: FullChecklist = {
     "dailyChecklist": {
         "Arcane Dailies": false,
         "Ursus": false,
@@ -7,7 +9,17 @@ const checklist = {
         "Yu Garden": false,
         "Gollux": false,
         "Legion Quest": false,
-        "Bosses": false,
+        "Bosses": {
+            "Zakum": false,
+            "Horntail" : false,
+            "Hila": false,
+            "Root Abyss": false,
+            "Von Leon": false,
+            "Arkarium": false,
+            "Magnus": false,
+            "Pink Bean": false,
+            "Ranmaru": false,
+        },
         "Commerci PQ": false,
         "Commerci Solo": false
     },
