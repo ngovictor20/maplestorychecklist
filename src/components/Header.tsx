@@ -4,6 +4,7 @@ import { setChecklistType } from 'redux/stateSlice';
 import { ChecklistType } from 'types';
 import useDialog from 'components/Dialog/useDialog';
 import { DialogType } from './Dialog/types';
+
 const Header = () => {
     const dispatch = useAppDispatch();
     const {renderDialog,toggleDialog} = useDialog();

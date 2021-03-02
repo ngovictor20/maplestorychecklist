@@ -3,8 +3,8 @@ import { updateCharList, resetDailyChecklists, resetWeeklyChecklists } from 'red
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
 import useDialog from 'components/Dialog/useDialog';
-import CharacterCard from './CharacterCard';
-import { DialogType } from './Dialog/types';
+import CharacterCard from 'components/Character/CharacterCard';
+import { DialogType } from 'components/Dialog/types';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(state => state.characters);
