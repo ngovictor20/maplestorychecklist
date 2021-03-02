@@ -1,6 +1,6 @@
 import React from 'react';
 import { Checklist } from 'types';
-import ChecklistItem from 'components/ChecklistItem';
+import ChecklistItem from 'components/Checklist/ChecklistItem';
 import SubChecklist from './SubChecklist';
 
 interface ChecklistProps {

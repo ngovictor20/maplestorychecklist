@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Checklist } from 'types'
-import SubChecklistItem from 'components/SubChecklistItem';
+import SubChecklistItem from 'components/Checklist/SubChecklistItem';
 import { useAppDispatch } from 'redux/hooks';
 import { updateSubChecklist } from 'redux/stateSlice';
 import { mapValues } from 'lodash';

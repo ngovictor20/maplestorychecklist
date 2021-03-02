@@ -1,5 +1,5 @@
 import React from 'react'
-import ChecklistRenderer from 'components/ChecklistRenderer';
+import ChecklistRenderer from 'components/Checklist/ChecklistRenderer';
 import {useAppSelector, useAppDispatch} from 'redux/hooks';
 
 const DailiesPage = () => {
