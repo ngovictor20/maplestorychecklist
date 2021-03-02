@@ -2,12 +2,13 @@ import React from 'react';
 import ChecklistItem from 'components/Checklist/ChecklistItem';
 import SubChecklist from 'components/Checklist/SubChecklist';
 import { useAppSelector } from 'redux/hooks';
+import { selectChecklist, selectChecklistType } from 'redux/stateSlice';
 
 
 
 const ChecklistRenderer: React.FC = () => {
-    const checklistType = useAppSelector(state => state.checklistType);
-    const checklist = useAppSelector(state => state.checklist);
+    const checklistType = useAppSelector(selectChecklistType);
+    const checklist = useAppSelector(selectChecklist);
     return (
         <div className="container w-full flex flex-col text-lg">
             {
