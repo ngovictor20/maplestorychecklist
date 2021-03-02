@@ -21,7 +21,7 @@ const Header = () => {
                 Weeklies
             </div>
             <div onClick={() => { dispatch(setChecklistType(ChecklistType.shiftChecklist)) }} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-lg ml-5 cursor-pointer">
-                Quiche
+                Shift
             </div>
             <div onClick={()=>{
                 toggleDialog(DialogType.deleteStorage);

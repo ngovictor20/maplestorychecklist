@@ -1,7 +1,7 @@
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import checklist from "config/checklists";
 import { isEmpty } from "lodash";
-import { Character, ChecklistType, FullChecklist } from "types";
+import { Character, Checklist, ChecklistType, FullChecklist } from "types";
 import { RootState } from "./store";
 
 interface IState {
@@ -13,6 +13,11 @@ interface IState {
 
 interface checklistUpdateData {
   field: string;
+}
+
+interface subchecklistData{
+  field: string;
+  data: Checklist;
 }
 
 const initialState: IState = {
@@ -80,6 +85,12 @@ export const stateSlice = createSlice({
       localStorage.removeItem(character.name);
       state.characters.splice(action.payload, 1);
       localStorage.setItem('characters', JSON.stringify(current(state).characters));
+    },
+    updateSubChecklist: (state, action: PayloadAction<subchecklistData>)=>{
+      console.log("update checklist sub");
+      console.log(action.payload.data, action.payload.field)
+      state.checklist[state.checklistType][action.payload.field] = action.payload.data;
+      localStorage.setItem(state.characters[state.characterIndex].name,JSON.stringify(current(state).checklist));
     }
   },
 });
@@ -93,7 +104,8 @@ export const {
   resetDailyChecklists,
   resetWeeklyChecklists,
   setChecklistType,
-  deleteCharacter
+  deleteCharacter,
+  updateSubChecklist
 } = stateSlice.actions;
 
 export const selectChecklist = (state: RootState) => state.checklist;

@@ -1,4 +1,4 @@
-import ChecklistRenderer from 'components/ChecklistRenderer';
+import ChecklistRenderer from 'components/Checklist/ChecklistRenderer';
 import React from 'react'
 import { useAppSelector } from 'redux/hooks';
 

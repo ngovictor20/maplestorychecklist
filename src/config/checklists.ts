@@ -1,4 +1,6 @@
-const checklist = {
+import { FullChecklist } from "types";
+
+const checklist: FullChecklist = {
     "dailyChecklist": {
         "Arcane Dailies": false,
         "Ursus": false,
@@ -7,9 +9,21 @@ const checklist = {
         "Yu Garden": false,
         "Gollux": false,
         "Legion Quest": false,
-        "Bosses": false,
-        "Commerci PQ": false,
-        "Commerci Solo": false
+        "Bosses": {
+            "Zakum": false,
+            "Horntail" : false,
+            "Hila": false,
+            "Root Abyss": false,
+            "Von Leon": false,
+            "Arkarium": false,
+            "Magnus": false,
+            "Pink Bean": false,
+            "Ranmaru": false,
+        },
+        "Commerci":{
+            "Commerci PQ": false,
+            "Commerci Solo": false
+        }
     },
     "shiftChecklist": {
         "WAP": false,
@@ -24,18 +38,20 @@ const checklist = {
         "Pets": false
     },
     "weeklyBosses": {
-        "HMag": false,
-        "CZak": false,
-        "HHila": false,
-        "CBean": false,
-        "CRA": false,
-        "CPap": false,
+        "Hard Magnus": false,
+        "Chaos Zakum": false,
+        "Hard Hila": false,
+        "Chao Pink Bean": false,
+        "Chaos Root Abyss": {
+
+        },
+        "Chaos Papulatus": false,
         "Princess No": false,
         "Akechi": false,
         "Lotus": false,
         "Damien": false,
         "Lucid": false,
-        "VHila": false
+        "Verus Hila": false
     }
 }
 

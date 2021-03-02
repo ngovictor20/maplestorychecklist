@@ -1,6 +1,9 @@
 interface Checklist {
-  [key: string]: boolean;
+  [key: string]: boolean | Checklist;
 }
+
+
+
 interface Character {
   name: string;
   class: Class;
