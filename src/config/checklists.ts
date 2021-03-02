@@ -20,8 +20,10 @@ const checklist: FullChecklist = {
             "Pink Bean": false,
             "Ranmaru": false,
         },
-        "Commerci PQ": false,
-        "Commerci Solo": false
+        "Commerci":{
+            "Commerci PQ": false,
+            "Commerci Solo": false
+        }
     },
     "shiftChecklist": {
         "WAP": false,

@@ -1,7 +1,5 @@
 interface Checklist {
-  [key: string]: boolean | {
-    [key: string]: boolean;
-  };
+  [key: string]: boolean | Checklist;
 }
 
 
