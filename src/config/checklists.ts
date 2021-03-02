@@ -38,18 +38,20 @@ const checklist: FullChecklist = {
         "Pets": false
     },
     "weeklyBosses": {
-        "HMag": false,
-        "CZak": false,
-        "HHila": false,
-        "CBean": false,
-        "CRA": false,
-        "CPap": false,
+        "Hard Magnus": false,
+        "Chaos Zakum": false,
+        "Hard Hila": false,
+        "Chao Pink Bean": false,
+        "Chaos Root Abyss": {
+
+        },
+        "Chaos Papulatus": false,
         "Princess No": false,
         "Akechi": false,
         "Lotus": false,
         "Damien": false,
         "Lucid": false,
-        "VHila": false
+        "Verus Hila": false
     }
 }
 
