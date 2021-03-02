@@ -17,7 +17,7 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
         dispatch(updateSubChecklist({ field: label, data: { ...checklist, [field]: value } }));
     }
 
-    const changeAllFields = (value:boolean) => {
+    const changeAllFields = (value: boolean) => {
         console.log("Change all")
         dispatch(updateSubChecklist({ field: label, data: mapValues(checklist, () => value) }));
     }
@@ -35,7 +35,7 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
                 {
                     Object.entries(checklist).map(([field, value]) => {
                         if (typeof value === 'boolean') {
-                            return <SubChecklistItem {...{ field, value, globalChecked: allChecked, onChangeHandler  }} key={field} />
+                            return <SubChecklistItem {...{ field, value, globalChecked: allChecked, onChangeHandler }} key={field} />
                         } else {
                             return undefined;
                         }
