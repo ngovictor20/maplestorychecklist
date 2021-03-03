@@ -4,13 +4,14 @@ import { setChecklistType } from 'redux/stateSlice';
 import { ChecklistType } from 'types';
 import useDialog from 'components/Dialog/useDialog';
 import { DialogType } from './Dialog/types';
+
 const Header = () => {
     const dispatch = useAppDispatch();
     const {renderDialog,toggleDialog} = useDialog();
     return (
         <div className="sticky top-0 z-30 h-14 px-36 flex-1 min-w-full flex items-center container bg-purple-500 text-white">
             {renderDialog()}
-            <img src={`${process.env.PUBLIC_URL}/maplestory-icon.png`} alt="Icon" width={32}/>
+            <img src={`${process.env.PUBLIC_URL}/maplestory-icon.png`} alt="Icon" className="w-7 h-7"/>
             <p className="text-xl">
                 Maplelist
             </p>

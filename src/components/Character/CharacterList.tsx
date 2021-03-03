@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import { updateCharList, resetDailyChecklists, resetWeeklyChecklists } from 'redux/stateSlice';
+import { updateCharList, resetDailyChecklists, resetWeeklyChecklists, selectCharacters, selectCharacterIndex } from 'redux/stateSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
 import useDialog from 'components/Dialog/useDialog';
-import CharacterCard from './CharacterCard';
-import { DialogType } from './Dialog/types';
+import CharacterCard from 'components/Character/CharacterCard';
+import { DialogType } from 'components/Dialog/types';
 
 const CharacterList: React.FC = () => {
-    const charList = useAppSelector(state => state.characters);
-    const charIndex = useAppSelector(state => state.characterIndex);
+    const charList = useAppSelector(selectCharacters);
+    const charIndex = useAppSelector(selectCharacterIndex);
     const dispatch = useAppDispatch();
     const { renderDialog, toggleDialog } = useDialog();
 
