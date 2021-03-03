@@ -1,4 +1,3 @@
-import LandingPage from 'pages/LandingPage';
 import React from 'react'
 import Header from 'components/Header';
 import CharacterList from 'components/Character/CharacterList';

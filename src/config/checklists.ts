@@ -26,8 +26,8 @@ const checklist: FullChecklist = {
         }
     },
     "shiftChecklist": {
-        "WAP": false,
-        "2x": false,
+        "Wealth Acquisition Potion": false,
+        "2x EXP": false,
         "Legion": false,
         "Familiars": false,
         "Drop/Meso Gear": false,
@@ -43,7 +43,10 @@ const checklist: FullChecklist = {
         "Hard Hila": false,
         "Chao Pink Bean": false,
         "Chaos Root Abyss": {
-
+            "Chaos Queen": false,
+            "Chaos Von Bon": false,
+            "Chaos Pierre": false,
+            "Chaos Vellum": false,
         },
         "Chaos Papulatus": false,
         "Princess No": false,

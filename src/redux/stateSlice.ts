@@ -3,24 +3,9 @@ import checklist from "config/checklists";
 import { Character, Checklist, ChecklistType, FullChecklist } from "types";
 import { getChecklistByCharacterName } from "redux/helpers";
 import { RootState } from "./store";
+import { ChecklistUpdateData, State, SubChecklistData } from "./types";
 
-interface IState {
-  characters: Array<Character>;
-  characterIndex: number;
-  checklist: FullChecklist;
-  checklistType: ChecklistType;
-}
-
-interface checklistUpdateData {
-  field: string;
-}
-
-interface subchecklistData {
-  field: string;
-  data: Checklist;
-}
-
-const initialState: IState = {
+const initialState: State = {
   checklist: {
     dailyChecklist: {},
     shiftChecklist: {},
@@ -41,14 +26,17 @@ export const stateSlice = createSlice({
     updateCharList: (state, action: PayloadAction<Array<Character>>) => {
       state.characters = action.payload;
     },
+    setChecklistType: (state, action: PayloadAction<ChecklistType>) => {
+      state.checklistType = action.payload;
+    },
     addChar: (state, action: PayloadAction<Character>) => {
       state.characters.push(action.payload);
       localStorage.setItem("characters", JSON.stringify(current(state).characters));
     },
-    updateChecklistItem: (state, action: PayloadAction<checklistUpdateData>) => {
+    updateChecklistItem: (state, action: PayloadAction<ChecklistUpdateData>) => {
       const { field } = action.payload;
-      const { checklistType, characters } = state;
-      state.checklist[checklistType][field] = !state.checklist[checklistType][field];
+      const { checklistType, characters, checklist } = state;
+      state.checklist[checklistType][field] = checklist[checklistType][field];
       localStorage.setItem(characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     },
     setCharIndex: (state, action: PayloadAction<number>) => {
@@ -67,16 +55,13 @@ export const stateSlice = createSlice({
         localStorage.setItem(character.name, JSON.stringify({ ...checklist, weeklyBosses, dailyChecklist }))
       })
     },
-    setChecklistType: (state, action: PayloadAction<ChecklistType>) => {
-      state.checklistType = action.payload;
-    },
     deleteCharacter: (state, action: PayloadAction<number>) => {
       const { name } = state.characters[action.payload];
       localStorage.removeItem(name);
       state.characters.splice(action.payload, 1);
       localStorage.setItem('characters', JSON.stringify(current(state).characters));
     },
-    updateSubChecklist: (state, action: PayloadAction<subchecklistData>) => {
+    updateSubChecklist: (state, action: PayloadAction<SubChecklistData>) => {
       state.checklist[state.checklistType][action.payload.field] = action.payload.data;
       localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     }
