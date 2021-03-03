@@ -1,5 +1,5 @@
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
-import checklist from "config/checklists";
+import checklistBase from "config/checklists";
 import { Character, Checklist, ChecklistType, FullChecklist } from "types";
 import { getChecklistByCharacterName } from "redux/helpers";
 import { RootState } from "./store";
@@ -35,9 +35,9 @@ export const stateSlice = createSlice({
     },
     updateChecklistItem: (state, action: PayloadAction<ChecklistUpdateData>) => {
       const { field } = action.payload;
-      const { checklistType, characters, checklist } = state;
-      state.checklist[checklistType][field] = checklist[checklistType][field];
-      localStorage.setItem(characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+      const { checklistType, characters, checklist, characterIndex } = state;
+      state.checklist[checklistType][field] = !checklist[checklistType][field];
+      localStorage.setItem(characters[characterIndex].name, JSON.stringify(current(state).checklist));
     },
     setCharIndex: (state, action: PayloadAction<number>) => {
       const { name } = state.characters[action.payload]
@@ -46,13 +46,13 @@ export const stateSlice = createSlice({
     },
     resetDailyChecklists: (state) => {
       state.characters.forEach((character) => {
-        localStorage.setItem(character.name, JSON.stringify({ ...checklist, dailyChecklist: checklist.dailyChecklist }))
+        localStorage.setItem(character.name, JSON.stringify({ ...checklistBase, dailyChecklist: checklistBase.dailyChecklist }))
       })
     },
     resetWeeklyChecklists: (state) => {
       state.characters.forEach((character) => {
-        const { weeklyBosses, dailyChecklist } = checklist;
-        localStorage.setItem(character.name, JSON.stringify({ ...checklist, weeklyBosses, dailyChecklist }))
+        const { weeklyBosses, dailyChecklist } = checklistBase;
+        localStorage.setItem(character.name, JSON.stringify({ ...checklistBase, weeklyBosses, dailyChecklist }))
       })
     },
     deleteCharacter: (state, action: PayloadAction<number>) => {

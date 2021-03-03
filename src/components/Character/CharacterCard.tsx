@@ -2,7 +2,7 @@ import React from 'react'
 import { useAppDispatch } from 'redux/hooks';
 import { setCharIndex } from 'redux/stateSlice';
 import { Class } from 'types'
-import { DialogType } from '../Dialog/types';
+import { DialogType } from 'components/Dialog/types';
 interface CharacterProps {
     name: string;
     className: Class;
