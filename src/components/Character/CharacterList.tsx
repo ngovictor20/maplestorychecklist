@@ -18,18 +18,20 @@ const CharacterList: React.FC = () => {
     const checkIfLastVisitedExpired = () => {
         const currentDate = utcToZonedTime(new Date(), "America/New_York")
         const lastCheckedDate = localStorage.getItem("lastVisited");
-        const resetDate = setHours(currentDate, 19);
-        const lastLogin = utcToZonedTime(lastCheckedDate!.toString(), "America/New_York");
-        console.log(lastLogin);
-        console.log(currentDate, getHours(currentDate));
-        if (getHours(currentDate) >= 19 && isBefore(lastLogin, resetDate)) {
-            console.log("Checklists should reset")
-            if (isWednesday(currentDate)) {
-                dispatch(resetWeeklyChecklists());
-                console.log("reset weekly")
-            } else {
-                dispatch(resetDailyChecklists());
-                console.log("Reset daily");
+        if (lastCheckedDate) {
+            const resetDate = setHours(currentDate, 19);
+            const lastLogin = utcToZonedTime(lastCheckedDate!.toString(), "America/New_York");
+            console.log(lastLogin);
+            console.log(currentDate, getHours(currentDate));
+            if (getHours(currentDate) >= 19 && isBefore(lastLogin, resetDate)) {
+                console.log("Checklists should reset")
+                if (isWednesday(currentDate)) {
+                    dispatch(resetWeeklyChecklists());
+                    console.log("reset weekly")
+                } else {
+                    dispatch(resetDailyChecklists());
+                    console.log("Reset daily");
+                }
             }
         }
         localStorage.setItem("lastVisited", currentDate.toISOString());
