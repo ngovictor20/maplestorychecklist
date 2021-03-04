@@ -1,20 +1,20 @@
 {
   "files": {
     "main.css": "/maplestorychecklist/static/css/main.ecbe9d75.chunk.css",
-    "main.js": "/maplestorychecklist/static/js/main.f57bcb3e.chunk.js",
-    "main.js.map": "/maplestorychecklist/static/js/main.f57bcb3e.chunk.js.map",
+    "main.js": "/maplestorychecklist/static/js/main.9103f7e4.chunk.js",
+    "main.js.map": "/maplestorychecklist/static/js/main.9103f7e4.chunk.js.map",
     "runtime-main.js": "/maplestorychecklist/static/js/runtime-main.769e215c.js",
     "runtime-main.js.map": "/maplestorychecklist/static/js/runtime-main.769e215c.js.map",
-    "static/js/2.290ea469.chunk.js": "/maplestorychecklist/static/js/2.290ea469.chunk.js",
-    "static/js/2.290ea469.chunk.js.map": "/maplestorychecklist/static/js/2.290ea469.chunk.js.map",
+    "static/js/2.566094ae.chunk.js": "/maplestorychecklist/static/js/2.566094ae.chunk.js",
+    "static/js/2.566094ae.chunk.js.map": "/maplestorychecklist/static/js/2.566094ae.chunk.js.map",
     "index.html": "/maplestorychecklist/index.html",
     "static/css/main.ecbe9d75.chunk.css.map": "/maplestorychecklist/static/css/main.ecbe9d75.chunk.css.map",
-    "static/js/2.290ea469.chunk.js.LICENSE.txt": "/maplestorychecklist/static/js/2.290ea469.chunk.js.LICENSE.txt"
+    "static/js/2.566094ae.chunk.js.LICENSE.txt": "/maplestorychecklist/static/js/2.566094ae.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.769e215c.js",
-    "static/js/2.290ea469.chunk.js",
+    "static/js/2.566094ae.chunk.js",
     "static/css/main.ecbe9d75.chunk.css",
-    "static/js/main.f57bcb3e.chunk.js"
+    "static/js/main.9103f7e4.chunk.js"
   ]
 }
