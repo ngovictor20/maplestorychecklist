@@ -5,6 +5,9 @@ import { isEmpty } from 'lodash';
 import useDialog from 'components/Dialog/useDialog';
 import CharacterCard from 'components/Character/CharacterCard';
 import { DialogType } from 'components/Dialog/types';
+import { utcToZonedTime } from 'date-fns-tz';
+import { getHours, isThursday, isWednesday, setHours } from 'date-fns';
+import { isBefore } from 'date-fns/fp';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(selectCharacters);
@@ -13,24 +16,23 @@ const CharacterList: React.FC = () => {
     const { renderDialog, toggleDialog } = useDialog();
 
     const checkIfLastVisitedExpired = () => {
-        const loginDate = new Date();
+        const currentDate = utcToZonedTime(new Date(), "America/New_York")
         const lastCheckedDate = localStorage.getItem("lastVisited");
-        console.log(loginDate.getHours());
-        //if its daily expiry
-        if (lastCheckedDate && loginDate.getHours() > 19 && new Date(lastCheckedDate) < loginDate && new Date(lastCheckedDate).getHours() < 19) {
-            console.log("Daily check passed");
-            //check if its weekly expired
-            if (loginDate.getDay() === 0) {
-                console.log("week check passed");
+        const resetDate = setHours(currentDate, 19);
+        const lastLogin = utcToZonedTime(lastCheckedDate!.toString(), "America/New_York");
+        console.log(lastLogin);
+        console.log(currentDate, getHours(currentDate));
+        if (getHours(currentDate) >= 19 && isBefore(lastLogin, resetDate)) {
+            console.log("Checklists should reset")
+            if (isWednesday(currentDate)) {
                 dispatch(resetWeeklyChecklists());
+                console.log("reset weekly")
             } else {
-                console.log("weeklycheck failed")
                 dispatch(resetDailyChecklists());
+                console.log("Reset daily");
             }
-        } else {
-            dispatch(resetDailyChecklists());
         }
-        localStorage.setItem("lastVisited", loginDate.toISOString());
+        localStorage.setItem("lastVisited", currentDate.toISOString());
     }
 
     useEffect(() => {
