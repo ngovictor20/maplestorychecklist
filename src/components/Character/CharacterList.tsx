@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
-import { updateCharList, resetDailyChecklists, resetWeeklyChecklists, selectCharacters, selectCharacterIndex } from 'redux/stateSlice';
+import { updateCharList, resetDailyChecklists, resetChecklists, selectCharacters, selectCharacterIndex } from 'redux/stateSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
 import useDialog from 'components/Dialog/useDialog';
 import CharacterCard from 'components/Character/CharacterCard';
 import { DialogType } from 'components/Dialog/types';
 import { utcToZonedTime } from 'date-fns-tz';
-import { getHours, isWednesday, set, isBefore } from 'date-fns';
+import { getHours, isWednesday, set, isBefore, getMinutes } from 'date-fns';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(selectCharacters);
@@ -18,7 +18,7 @@ const CharacterList: React.FC = () => {
         const currentDate = utcToZonedTime(new Date(), "America/New_York")
         const lastCheckedDate = localStorage.getItem("lastVisited");
         if (lastCheckedDate) {
-            const resetDate = set(currentDate, {hours: 19, minutes: 0, seconds: 0, milliseconds: 0});
+            const resetDate = set(currentDate, {hours: 19, minutes: 0, seconds:0, milliseconds: 0}); //19 0 0 0
             const lastLogin = utcToZonedTime(lastCheckedDate!.toString(), "America/New_York");
             console.log(`Last Login: ${lastLogin}`);
             console.log(`Current Date: ${currentDate}`);
@@ -26,7 +26,7 @@ const CharacterList: React.FC = () => {
             if (getHours(currentDate) >= 19 && isBefore(lastLogin, resetDate)) {
                 console.log("Checklists should reset")
                 if (isWednesday(currentDate)) {
-                    dispatch(resetWeeklyChecklists());
+                    dispatch(resetChecklists());
                     console.log("reset weekly")
                 } else {
                     dispatch(resetDailyChecklists());
@@ -38,11 +38,11 @@ const CharacterList: React.FC = () => {
     }
 
     useEffect(() => {
-        checkIfLastVisitedExpired();
         const list = localStorage.getItem("characters");
         if (!isEmpty(list)) {
             dispatch(updateCharList(JSON.parse(list!.toString())))
         }
+        checkIfLastVisitedExpired();
     }, [])
 
     return (

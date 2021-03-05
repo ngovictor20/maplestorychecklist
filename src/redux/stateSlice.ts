@@ -45,14 +45,20 @@ export const stateSlice = createSlice({
       state.characterIndex = action.payload;
     },
     resetDailyChecklists: (state) => {
-      state.characters.forEach((character) => {
-        localStorage.setItem(character.name, JSON.stringify({ ...checklistBase, dailyChecklist: checklistBase.dailyChecklist }))
+      current(state).characters.forEach((character) => {
+        const currentChecklist = localStorage.getItem(character.name);
+        if (currentChecklist) {
+          const { weeklyBosses } = JSON.parse(currentChecklist.toString());
+          localStorage.setItem(character.name, JSON.stringify({ ...checklistBase, weeklyBosses }))
+        } else {
+          localStorage.setItem(character.name, JSON.stringify({ ...checklistBase }))
+        }
       })
     },
-    resetWeeklyChecklists: (state) => {
-      state.characters.forEach((character) => {
-        const { weeklyBosses, dailyChecklist } = checklistBase;
-        localStorage.setItem(character.name, JSON.stringify({ ...checklistBase, weeklyBosses, dailyChecklist }))
+    resetChecklists: (state) => {
+      const { characters } = current(state);
+      characters.forEach((character) => {
+        localStorage.setItem(character.name, JSON.stringify({ ...checklistBase }))
       })
     },
     deleteCharacter: (state, action: PayloadAction<number>) => {
@@ -75,7 +81,7 @@ export const {
   addChar,
   updateChecklistItem,
   resetDailyChecklists,
-  resetWeeklyChecklists,
+  resetChecklists,
   setChecklistType,
   deleteCharacter,
   updateSubChecklist
