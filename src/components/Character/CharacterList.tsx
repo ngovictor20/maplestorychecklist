@@ -6,7 +6,7 @@ import useDialog from 'components/Dialog/useDialog';
 import CharacterCard from 'components/Character/CharacterCard';
 import { DialogType } from 'components/Dialog/types';
 import { utcToZonedTime } from 'date-fns-tz';
-import { getHours, isWednesday, set, isBefore, getMinutes } from 'date-fns';
+import { getHours, isWednesday, set, isBefore } from 'date-fns';
 
 const CharacterList: React.FC = () => {
     const charList = useAppSelector(selectCharacters);
