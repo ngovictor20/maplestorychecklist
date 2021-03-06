@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import AddCharacterDialog from 'components/Dialog/AddCharacterDialog';
-import ConfirmDeleteDialog from 'components/Dialog/ConfirmDialog';
 import { DialogType } from 'components/Dialog/types';
 import { deleteCharacter } from 'redux/stateSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
+import ConfirmDialog from 'components/Dialog/ConfirmDialog';
 
 interface DialogProps {
     setDialogOpen: (arg: boolean) => void;
@@ -37,24 +37,29 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
             case DialogType.addCharacter:
                 return <AddCharacterDialog setDialogOpen={setDialogOpen} setIsError={setIsError} setErrorMsg={setErrorMsg} setIsLoading={setIsLoading} />
             case DialogType.deleteCharacter:
-                return <ConfirmDeleteDialog {...{
-                    setIsError, setErrorMsg, setIsLoading,
+                return <ConfirmDialog {...{
                     confirmMessage: "Are you sure you want to delete this character?",
                     onConfirm: () => {
                         dispatch(deleteCharacter(charIndex));
                         setDialogOpen(false);
                     }
-                }} ></ConfirmDeleteDialog>
+                }} ></ConfirmDialog>
             case DialogType.deleteStorage:
-                return <ConfirmDeleteDialog {...{
-                    setIsError, setErrorMsg, setIsLoading,
+                return <ConfirmDialog {...{
                     confirmMessage: "Are you sure you want to wipe your character data?",
                     onConfirm: () => {
                         localStorage.clear();
                         setDialogOpen(false);
                         window.location.reload();
                     }
-                }} ></ConfirmDeleteDialog>
+                }} ></ConfirmDialog>
+            case DialogType.informReset:
+                return <ConfirmDialog {...{
+                    confirmMessage: "Your checklists have been reset!",
+                    onConfirm: () => {
+                        setDialogOpen(false);
+                    }
+                }} />
             default:
                 break;
         }

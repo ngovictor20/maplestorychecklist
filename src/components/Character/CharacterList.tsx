@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { updateCharList, resetDailyChecklists, resetChecklists, selectCharacters, selectCharacterIndex } from 'redux/stateSlice';
 import { useAppSelector, useAppDispatch } from 'redux/hooks';
 import { isEmpty } from 'lodash';
@@ -20,18 +20,15 @@ const CharacterList: React.FC = () => {
         if (lastCheckedDate) {
             const resetDate = set(currentDate, {hours: 19, minutes: 0, seconds:0, milliseconds: 0}); //19 0 0 0
             const lastLogin = utcToZonedTime(lastCheckedDate!.toString(), "America/New_York");
-            console.log(`Last Login: ${lastLogin}`);
-            console.log(`Current Date: ${currentDate}`);
-            console.log(`Reset Date: ${resetDate}`)
             if (getHours(currentDate) >= 19 && isBefore(lastLogin, resetDate)) {
-                console.log("Checklists should reset")
                 if (isWednesday(currentDate)) {
                     dispatch(resetChecklists());
-                    console.log("reset weekly")
+                    console.log("Weekly Reset Triggered")
                 } else {
                     dispatch(resetDailyChecklists());
-                    console.log("Reset daily");
+                    console.log("Daily Reset Triggered");
                 }
+                toggleDialog(DialogType.informReset);
             }
         }
         localStorage.setItem("lastVisited", currentDate.toISOString());
@@ -42,7 +39,7 @@ const CharacterList: React.FC = () => {
         if (!isEmpty(list)) {
             dispatch(updateCharList(JSON.parse(list!.toString())))
         }
-        checkIfLastVisitedExpired();
+        checkIfLastVisitedExpired(); //ADD DIALOG POPUP IF RESET
     }, [])
 
     return (
