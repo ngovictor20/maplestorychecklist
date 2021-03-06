@@ -43,16 +43,14 @@ const CharacterList: React.FC = () => {
     }, [])
 
     return (
-        <div className="grid grid-rows-1 grid-cols-2">
+        <div className="">
             {renderDialog()}
-            <div className="flex items-center py-5 gap-x-4">
+            <div className="flex flex-col items-center py-5 gap-x-4">
                 {charList && charList.map((char, index) => (
                     <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex, toggleDialog }} key={char.name} />
                 ))}
             </div>
-            <button onClick={() => { toggleDialog(DialogType.addCharacter) }} className="col-start-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5 w-40 place-self-end self-start">
-                Add Character
-            </button>
+
         </div>
     )
 }
