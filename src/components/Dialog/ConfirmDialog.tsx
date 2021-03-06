@@ -1,9 +1,9 @@
 import React  from 'react';
 
 interface DialogProps {
-    setIsLoading: (arg: boolean) => void;
-    setIsError: (arg: boolean) => void;
-    setErrorMsg: (arg: string) => void;
+    setIsLoading?: (arg: boolean) => void;
+    setIsError?: (arg: boolean) => void;
+    setErrorMsg?: (arg: string) => void;
     onConfirm: ()=>void;
     confirmMessage: string;
 }
