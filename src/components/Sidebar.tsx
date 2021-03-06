@@ -11,7 +11,7 @@ const SidebarContainer = styled.div`
 const Sidebar = () => {
     const { renderDialog, toggleDialog } = useDialog();
     return (
-        <SidebarContainer className="border-r-2 border-accent-grey bottom-0 w-full left-0 relative">
+        <SidebarContainer className="border-r-2 border-accent-grey bottom-0 w-full left-0 relative shadow-xl">
             {renderDialog()}
             <div className="pt-6">
                 <CharacterList />
