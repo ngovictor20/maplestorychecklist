@@ -1,16 +1,25 @@
 import React, { useState } from 'react'
 import CharacterList from 'components/Character/CharacterList'
+import useDialog from 'components/Dialog/useDialog';
+import { DialogType } from 'components/Dialog/types';
+import styled from 'styled-components';
 
+const SidebarContainer = styled.div`
+    height: calc(100vh - 5rem);
+`;
 
 const Sidebar = () => {
-    const [isExpanded, setIsExpanded] = useState(false);
+    const { renderDialog, toggleDialog } = useDialog();
     return (
-        <div className="border-r-2 bottom-0 w-1/6 left-0 min-h-screen relative">
-            <img src={`${process.env.PUBLIC_URL}/chevron-${isExpanded ? "left" : "right"}.svg`} onClick={() => { setIsExpanded(!isExpanded) }} className="absolute cursor-pointer right-1 pt-3" alt="expand" />
+        <SidebarContainer className="border-r-2 border-accent-grey bottom-0 w-full left-0 relative">
+            {renderDialog()}
             <div className="pt-6">
                 <CharacterList />
             </div>
-        </div>
+            <div onClick={() => { toggleDialog(DialogType.addCharacter) }} className="hover:bg-accent-grey hover:text-white absolute bottom-0 w-full h-14 text-center flex items-center justify-center">
+                    <p>Add Character</p>
+            </div>
+        </SidebarContainer>
     )
 }
 
