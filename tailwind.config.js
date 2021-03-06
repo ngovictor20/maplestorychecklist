@@ -38,7 +38,13 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    extend: {
+      ringColor: ['responsive', 'dark', 'focus-within', 'focus', 'hover'],
+      ringOffsetColor: ['responsive', 'dark', 'focus-within', 'focus', 'hover'],
+      ringOffsetWidth: ['responsive', 'focus-within', 'focus', 'hover'],
+      ringOpacity: ['responsive', 'dark', 'focus-within', 'focus', 'hover'],
+      ringWidth: ['responsive', 'focus-within', 'focus', 'hover'],
+    },
   },
   plugins: [
     require('@tailwindcss/typography'),
