@@ -5,33 +5,35 @@ import { ChecklistType } from 'types';
 import useDialog from 'components/Dialog/useDialog';
 import { DialogType } from './Dialog/types';
 
+const NavItemClass = "hover:bg-accent-grey h-fullcursor-pointer px-2 flex items-center";
+
 const Header = () => {
     const dispatch = useAppDispatch();
     const { renderDialog, toggleDialog } = useDialog();
     return (
-        <div className="sticky top-0 z-30 h-20 px-36 flex-1 min-w-full flex items-center container bg-purple-500 text-white justify-between">
+        <div className="sticky top-0 z-30 h-20 px-36 flex-1 min-w-full flex container bg-header-grey text-white justify-between">
             {renderDialog()}
-            <div className="flex">
+            <div className="flex items-center ">
                 <img src={`${process.env.PUBLIC_URL}/maplestory-icon.png`} alt="Icon" className="w-7 h-7" />
                 <p className="text-2xl">
                     Maplelist
-            </p>
+                </p>
             </div>
-            <div className="flex justify">
-                <div onClick={() => { dispatch(setChecklistType(ChecklistType.dailyChecklist)) }} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-xl ml-20 cursor-pointer">
-                    Dailies
+            <div className="flex justify space-x-6 h-full text-xl text-white ">
+                <div onClick={() => { dispatch(setChecklistType(ChecklistType.dailyChecklist)) }} className={NavItemClass}>
+                    <p>Dailies</p>
                 </div>
-                <div onClick={() => { dispatch(setChecklistType(ChecklistType.weeklyBosses)) }} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-xl ml-5 cursor-pointer">
-                    Weeklies
+                <div onClick={() => { dispatch(setChecklistType(ChecklistType.weeklyBosses)) }} className={NavItemClass}>
+                    <p>Weeklies</p>
                 </div>
-                <div onClick={() => { dispatch(setChecklistType(ChecklistType.shiftChecklist)) }} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-xl ml-5 cursor-pointer">
-                    Shift
+                <div onClick={() => { dispatch(setChecklistType(ChecklistType.shiftChecklist)) }} className={NavItemClass}>
+                    <p>Shift</p>
                 </div>
                 <div onClick={() => {
                     toggleDialog(DialogType.deleteStorage);
-                }} className="bg-purple-500 hover:bg-purple-700 text-white px-3 py-2 rounded-md text-xl ml-5 cursor-pointer">
-                    Clear Data
-            </div>
+                }} className={NavItemClass}>
+                    <p>Clear Data</p>
+                </div>
             </div>
         </div>
     )

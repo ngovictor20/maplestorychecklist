@@ -17,7 +17,9 @@ const MainPage = () => {
                 <button onClick={() => { toggleDialog(DialogType.addCharacter) }} className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full my-5 w-40 absolute right-40">
                     Add Character
                 </button>
-                <ChecklistRenderer />
+                <div>
+                    <ChecklistRenderer />
+                </div>
             </div>
         </div>
     )

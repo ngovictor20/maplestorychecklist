@@ -45,7 +45,7 @@ const CharacterList: React.FC = () => {
     return (
         <div className="">
             {renderDialog()}
-            <div className="flex flex-col items-center py-5 gap-x-4">
+            <div className="flex flex-col items-center py-5 gap-y-4">
                 {charList && charList.map((char, index) => (
                     <CharacterCard {...{ index, name: char.name, className: char.class, level: char.level, selected: index === charIndex, toggleDialog }} key={char.name} />
                 ))}

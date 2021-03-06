@@ -15,7 +15,12 @@ module.exports = {
       '3/4': '75%',
       'full': '100%',
     },
-    extend: {},
+    extend: {
+      colors: {
+        'header-grey': "#45547F",
+        'accent-grey': "#737687",
+      },
+    },
   },
   variants: {
     extend: {},
