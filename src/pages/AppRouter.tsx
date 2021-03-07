@@ -1,17 +1,23 @@
 import React from 'react'
 import Header from 'components/Header';
-import CharacterList from 'components/Character/CharacterList';
-import ChecklistRenderer from '../components/Checklist/ChecklistRenderer';
+import Sidebar from 'components/Sidebar';
+import styled from 'styled-components';
+import ContentContainer from 'components/ContentContainer';
+
+const Container = styled.div`
+    display: grid;
+    grid-template-columns: 12.5% auto; 
+    width: 100vw;
+`;
 
 const MainPage = () => {
-
     return (
-        <div>
-                <Header />
-                <div className="lg:z-50 max-w-8xl px-36 container min-w-full h-screen">
-                    <CharacterList />
-                    <ChecklistRenderer/>
-                </div>
+        <div className="h-screen">
+            <Header />
+            <Container className="pt-20">
+                <Sidebar />
+                <ContentContainer/>
+            </Container>
         </div>
     )
 }
