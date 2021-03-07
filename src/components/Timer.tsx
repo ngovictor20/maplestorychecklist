@@ -13,6 +13,7 @@ const Timer: React.FC = () => {
         }
     }
     const [timeUntilDailyReset, setTimeUntilDailyReset] = useState(calculateTimeLeft(endOfToday()));
+
     useEffect(() => {
         const timer = setTimeout(() => {
             setTimeUntilDailyReset(calculateTimeLeft(endOfToday()));
@@ -21,7 +22,9 @@ const Timer: React.FC = () => {
     });
     return (
         <div>
-            {JSON.stringify(timeUntilDailyReset)}
+            <p>
+                {`Time Until Today's Reset ${timeUntilDailyReset.days} Days, ${timeUntilDailyReset.hours}:${timeUntilDailyReset.minutes}:${timeUntilDailyReset.seconds}`}
+            </p>
         </div>
     )
 }
