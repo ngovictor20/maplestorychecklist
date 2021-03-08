@@ -1,19 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { differenceInMilliseconds, endOfISOWeek, endOfToday } from 'date-fns';
+import { endOfToday } from 'date-fns';
+import { calculateTimeLeft, formatToDate } from 'helpers/timeFunctions';
 
 const Timer: React.FC = () => {
-    const calculateTimeLeft = (resetDate: Date) => {
-        const currentDate = new Date();
-        const difference = differenceInMilliseconds(resetDate, currentDate);
-        return {
-            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-            minutes: Math.floor((difference / 1000 / 60) % 60),
-            seconds: Math.floor((difference / 1000) % 60)
-        }
-    }
     const [timeUntilDailyReset, setTimeUntilDailyReset] = useState(calculateTimeLeft(endOfToday()));
-
+    console.log(new Date().getUTCHours());
     useEffect(() => {
         const timer = setTimeout(() => {
             setTimeUntilDailyReset(calculateTimeLeft(endOfToday()));
@@ -23,7 +14,7 @@ const Timer: React.FC = () => {
     return (
         <div>
             <p>
-                {`Time Until Today's Reset ${timeUntilDailyReset.days} Days, ${timeUntilDailyReset.hours}:${timeUntilDailyReset.minutes}:${timeUntilDailyReset.seconds}`}
+                {`Today's Reset - ${formatToDate(timeUntilDailyReset)}`}
             </p>
         </div>
     )

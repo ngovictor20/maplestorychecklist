@@ -43,7 +43,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
                 </select>
             </label>
             <label className="block">
-                <span>Number</span>
+                <span>Level</span>
                 <input type="number" max={300} min={0} onChange={(e) => {
                     const value = parseInt(e.target.value);
                     if (value > 300 || value < 0) {

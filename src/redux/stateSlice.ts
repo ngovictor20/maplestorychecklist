@@ -1,7 +1,7 @@
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import checklistBase from "config/checklists";
 import { Character, Checklist, ChecklistType, FullChecklist } from "types";
-import { getChecklistByCharacterName } from "redux/helpers";
+import { getChecklistByCharacterName, resetChecklist } from "redux/helpers";
 import { RootState } from "./store";
 import { ChecklistUpdateData, State, SubChecklistData } from "./types";
 
@@ -70,6 +70,10 @@ export const stateSlice = createSlice({
     updateSubChecklist: (state, action: PayloadAction<SubChecklistData>) => {
       state.checklist[state.checklistType][action.payload.field] = action.payload.data;
       localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+    },
+    addChecklistItem: (state)=>{ //, action: PayloadAction<{field: string}>
+      const {checklistType, checklist} = current(state);
+      console.log(resetChecklist(checklist[checklistType]));
     }
   },
 });
@@ -84,7 +88,8 @@ export const {
   resetChecklists,
   setChecklistType,
   deleteCharacter,
-  updateSubChecklist
+  updateSubChecklist,
+  addChecklistItem,
 } = stateSlice.actions;
 
 export const selectChecklist = (state: RootState) => state.checklist;
