@@ -44,6 +44,7 @@ module.exports = {
       ringOffsetWidth: ['responsive', 'focus-within', 'focus', 'hover'],
       ringOpacity: ['responsive', 'dark', 'focus-within', 'focus', 'hover'],
       ringWidth: ['responsive', 'focus-within', 'focus', 'hover'],
+      visibility: ['hover', 'focus'],
     },
   },
   plugins: [

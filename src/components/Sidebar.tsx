@@ -6,6 +6,7 @@ import styled from 'styled-components';
 
 const SidebarContainer = styled.div`
     height: calc(100vh - 5rem);
+    box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.25);
 `;
 
 const Sidebar = () => {

@@ -42,6 +42,7 @@ const checklist: FullChecklist = {
         "Chaos Zakum": false,
         "Hard Hila": false,
         "Chao Pink Bean": false,
+        "Cygnus" : false,
         "Chaos Root Abyss": {
             "Chaos Queen": false,
             "Chaos Von Bon": false,

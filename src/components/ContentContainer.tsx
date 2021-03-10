@@ -1,7 +1,7 @@
 import React from 'react'
 import ChecklistRenderer from 'components/Checklist/ChecklistRenderer'
 import Timer from 'components/Timer'
-import { addChecklistItem } from 'redux/stateSlice'
+import { resetChecklists } from 'redux/stateSlice'
 import { useAppDispatch } from 'redux/hooks'
 
 const ContentContainer = () => {
@@ -13,7 +13,7 @@ const ContentContainer = () => {
                 <Timer/>
             </div>
             <div onClick={()=>{
-                dispatch(addChecklistItem());
+                dispatch(resetChecklists());
             }}>
                 Reset Current Checklist
             </div>

@@ -20,6 +20,8 @@ const StyledForm = styled.div`
     transform: translate(-50%, 0%);
 `;
 
+const InputClass = "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50";
+
 const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, setIsError, setErrorMsg }) => {
     const [name, setName] = useState("");
     const [job, setJob] = useState<Class>(Class.magician);
@@ -30,11 +32,11 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
         <StyledForm>
             <label className="block">
                 <span>Name</span>
-                <input type="text" maxLength={12} onChange={(e) => { setName(e.target!.value) }} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
+                <input type="text" maxLength={12} onChange={(e) => { setName(e.target!.value) }} className={InputClass}></input>
             </label>
             <label className="block">
                 <span>Class</span>
-                <select onChange={(e) => { setJob(Class[e.target!.value! as keyof typeof Class]) }} className="block w-full mt-1 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                <select onChange={(e) => { setJob(Class[e.target!.value! as keyof typeof Class]) }} className={InputClass}>
                     {
                         Object.keys(Class).map((value) => {
                             return (<option>{value}</option>)
@@ -52,7 +54,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen, setIsLoading, 
                         setLevel(value);
                     }
                     
-                }} value={level} className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
+                }} value={level} className={InputClass} />
             </label>
             <button onClick={() => {
                 dispatch(addChar({ name, level, class: job }));

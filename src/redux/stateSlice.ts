@@ -4,7 +4,8 @@ import { Character, Checklist, ChecklistType, FullChecklist } from "types";
 import { getChecklistByCharacterName, resetChecklist } from "redux/helpers";
 import { RootState } from "./store";
 import { ChecklistUpdateData, State, SubChecklistData } from "./types";
-
+import deepFreeze from 'deep-freeze';
+import { omit } from 'lodash';
 const initialState: State = {
   checklist: {
     dailyChecklist: {},
@@ -71,8 +72,22 @@ export const stateSlice = createSlice({
       state.checklist[state.checklistType][action.payload.field] = action.payload.data;
       localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     },
-    addChecklistItem: (state)=>{ //, action: PayloadAction<{field: string}>
-      const {checklistType, checklist} = current(state);
+    addChecklistItem: (state, action: PayloadAction<string>) => {
+      const { checklistType, checklist } = current(state);
+      if (!(action.payload in checklist[checklistType])) {
+        state.checklist[checklistType][action.payload] = false;
+        localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+      }
+    },
+    deleteChecklistItem: (state, action: PayloadAction<string>) => {
+      const { checklistType, checklist } = current(state);
+      deepFreeze(checklist[checklistType]);
+      state.checklist[checklistType] = omit(checklist[checklistType], [action.payload]);
+      console.log(current(state).checklist[checklistType])
+      localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+    },
+    resetExistingChecklist: (state) => {
+      const { checklistType, checklist } = current(state);
       console.log(resetChecklist(checklist[checklistType]));
     }
   },
@@ -90,6 +105,7 @@ export const {
   deleteCharacter,
   updateSubChecklist,
   addChecklistItem,
+  deleteChecklistItem,
 } = stateSlice.actions;
 
 export const selectChecklist = (state: RootState) => state.checklist;
