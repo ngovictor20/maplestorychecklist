@@ -35,6 +35,9 @@ module.exports = {
         'header-grey': "#45547F",
         'accent-grey': "#737687",
       },
+      gridTemplateColumns: {
+       'mainLayout': '75% 25%',
+      },
     },
   },
   variants: {

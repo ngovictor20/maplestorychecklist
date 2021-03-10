@@ -9,7 +9,7 @@ import { ChecklistType } from 'types';
 
 const StyledContainer = styled.div`
     box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
-    height: 80vh;
+    height: 100%;
     overflow-y:auto;
 `;
 
@@ -28,7 +28,7 @@ const ChecklistRenderer: React.FC = () => {
         }
     }
     return (
-        <StyledContainer className="container w-1/2 flex flex-col text-lg p-6 ">
+        <StyledContainer className="container w-full flex flex-col text-lg p-6 ">
             <h2 className="text-2xl sm:text-4xl lg:text-5xl leading-none font-extrabold text-gray-900 tracking-tight mb-7">{renderHeader()}</h2>
             {
                 Object.entries(checklist[checklistType]).map(([field, value]) => {
