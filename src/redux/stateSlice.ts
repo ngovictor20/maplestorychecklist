@@ -45,12 +45,26 @@ export const stateSlice = createSlice({
       state.checklist = getChecklistByCharacterName(name);
       state.characterIndex = action.payload;
     },
-    resetDailyChecklists: (state) => {
+    dailyResetChecklists: (state) => {
       current(state).characters.forEach((character) => {
         const currentChecklist = localStorage.getItem(character.name);
         if (currentChecklist) {
-          const { weeklyBosses } = JSON.parse(currentChecklist.toString());
-          localStorage.setItem(character.name, JSON.stringify({ ...checklistBase, weeklyBosses }))
+          const checklist = JSON.parse(currentChecklist.toString());
+          const { weeklyBosses } = checklist;
+          const clearedChecklist = clearChecklist(checklist);
+          localStorage.setItem(character.name, JSON.stringify({ ...clearedChecklist, weeklyBosses }))
+        } else {
+          localStorage.setItem(character.name, JSON.stringify({ ...checklistBase }))
+        }
+      })
+    },
+    weeklyResetChecklists: (state) => {
+      current(state).characters.forEach((character) => {
+        const currentChecklist = localStorage.getItem(character.name);
+        if (currentChecklist) {
+          const checklist = JSON.parse(currentChecklist.toString());
+          const clearedChecklist = clearChecklist(checklist);
+          localStorage.setItem(character.name, JSON.stringify({ ...clearedChecklist}))
         } else {
           localStorage.setItem(character.name, JSON.stringify({ ...checklistBase }))
         }
@@ -89,12 +103,14 @@ export const stateSlice = createSlice({
     clearExistingChecklist: (state) => {
       const { checklistType, checklist } = current(state);
       state.checklist[checklistType] = clearChecklist(checklist[checklistType]);
+      localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     },
-    clearAllChecklists: (state) => {
+    clearCharacterChecklist: (state) => {
       const { checklist } = current(state);
       const clearedChecklist = clearChecklist(checklist);
       //@ts-ignore
-      state.checklist = {...clearedChecklist};
+      state.checklist = { ...clearedChecklist };
+      localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     },
   },
 });
@@ -105,10 +121,11 @@ export const {
   updateCharList,
   addChar,
   updateChecklistItem,
-  resetDailyChecklists,
+  dailyResetChecklists,
+  weeklyResetChecklists,
   resetChecklists,
   clearExistingChecklist,
-  clearAllChecklists,
+  clearCharacterChecklist,
   setChecklistType,
   deleteCharacter,
   updateSubChecklist,

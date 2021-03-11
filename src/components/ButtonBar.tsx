@@ -1,5 +1,5 @@
 import React from 'react'
-import { resetChecklists, clearExistingChecklist, clearAllChecklists } from 'redux/stateSlice'
+import { clearExistingChecklist, clearCharacterChecklist } from 'redux/stateSlice'
 import { useAppDispatch } from 'redux/hooks'
 import useDialog from 'components/Dialog/useDialog';
 import { DialogType } from 'components/Dialog/types';
@@ -21,7 +21,7 @@ const ButtonBar = () => {
                 Clear Checklist
             </div>
             <div onClick={() => {
-                dispatch(clearAllChecklists());
+                dispatch(clearCharacterChecklist());
             }} className="w-full lg:w-4/5 h-10 text-center flex items-center justify-center cursor-pointer p-2 border-2 border-accent-grey rounded-md hover:ring-2">
                Clear All Checklist
             </div>

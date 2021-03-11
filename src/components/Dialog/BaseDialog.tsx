@@ -65,6 +65,8 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
                     confirmMessage: "Are you sure you want to reset all your checklists to the original list? This cannot be undone.",
                     onConfirm: () => {
                         dispatch(resetChecklists());
+                        setDialogOpen(false);
+                        window.location.reload();
                     }
                 }} />
             default:
