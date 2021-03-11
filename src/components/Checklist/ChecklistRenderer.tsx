@@ -29,7 +29,7 @@ const ChecklistRenderer: React.FC = () => {
     }
     return (
         <StyledContainer className="container w-full flex flex-col text-lg p-6 ">
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl leading-none font-extrabold text-gray-900 tracking-tight mb-7">{renderHeader()}</h2>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl leading-none font-extrabold text-gray-900 tracking-tight mb-5">{renderHeader()}</h2>
             {
                 Object.entries(checklist[checklistType]).map(([field, value]) => {
                     if (typeof value !== 'boolean') {
