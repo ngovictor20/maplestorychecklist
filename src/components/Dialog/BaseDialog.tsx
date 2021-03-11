@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import AddCharacterDialog from 'components/Dialog/AddCharacterDialog';
 import { DialogType } from 'components/Dialog/types';
-import { deleteCharacter } from 'redux/stateSlice';
+import { deleteCharacter, resetChecklists } from 'redux/stateSlice';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
 import ConfirmDialog from 'components/Dialog/ConfirmDialog';
 
@@ -24,7 +24,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
             case DialogType.addCharacter:
                 setHeader("Add Character");
                 break;
-            case DialogType.deleteCharacter | DialogType.deleteStorage:
+            case DialogType.deleteCharacter || DialogType.deleteStorage || DialogType.resetAllChecklists:
                 setHeader("Confirm Action");
                 break;
             default:
@@ -52,12 +52,19 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
                         setDialogOpen(false);
                         window.location.reload();
                     }
-                }} ></ConfirmDialog>
+                }} />
             case DialogType.informReset:
                 return <ConfirmDialog {...{
                     confirmMessage: "Your checklists have been reset!",
                     onConfirm: () => {
                         setDialogOpen(false);
+                    }
+                }} />
+            case DialogType.resetAllChecklists:
+                return <ConfirmDialog {...{
+                    confirmMessage: "Are you sure you want to reset all your checklists to the original list? This cannot be undone.",
+                    onConfirm: () => {
+                        dispatch(resetChecklists());
                     }
                 }} />
             default:

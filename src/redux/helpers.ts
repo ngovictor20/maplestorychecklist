@@ -15,12 +15,13 @@ const getChecklistByCharacterName = (charName: string) => {
       }
 }
 
-const resetChecklist = (obj: Checklist) =>
+//recursive function that sets everything to false in the checklist.
+const clearChecklist = (obj: Checklist) =>
 {
   const returnObject:Checklist = {};
   Object.entries(obj).forEach(([field,value])=>{
     if(typeof value !== 'boolean'){
-      returnObject[field] = resetChecklist(value);
+      returnObject[field] = clearChecklist(value);
     }else{
       returnObject[field] = false;
     }
@@ -28,4 +29,4 @@ const resetChecklist = (obj: Checklist) =>
   return returnObject;
 }
 
-export { getChecklistByCharacterName, resetChecklist}
+export { getChecklistByCharacterName, clearChecklist}

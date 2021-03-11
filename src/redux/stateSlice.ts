@@ -1,7 +1,7 @@
 import { createSlice, current, PayloadAction } from "@reduxjs/toolkit";
 import checklistBase from "config/checklists";
 import { Character, Checklist, ChecklistType, FullChecklist } from "types";
-import { getChecklistByCharacterName, resetChecklist } from "redux/helpers";
+import { getChecklistByCharacterName, clearChecklist } from "redux/helpers";
 import { RootState } from "./store";
 import { ChecklistUpdateData, State, SubChecklistData } from "./types";
 import deepFreeze from 'deep-freeze';
@@ -86,10 +86,16 @@ export const stateSlice = createSlice({
       console.log(current(state).checklist[checklistType])
       localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     },
-    resetExistingChecklist: (state) => {
+    clearExistingChecklist: (state) => {
       const { checklistType, checklist } = current(state);
-      console.log(resetChecklist(checklist[checklistType]));
-    }
+      state.checklist[checklistType] = clearChecklist(checklist[checklistType]);
+    },
+    clearAllChecklists: (state) => {
+      const { checklist } = current(state);
+      const clearedChecklist = clearChecklist(checklist);
+      //@ts-ignore
+      state.checklist = {...clearedChecklist};
+    },
   },
 });
 
@@ -101,6 +107,8 @@ export const {
   updateChecklistItem,
   resetDailyChecklists,
   resetChecklists,
+  clearExistingChecklist,
+  clearAllChecklists,
   setChecklistType,
   deleteCharacter,
   updateSubChecklist,
