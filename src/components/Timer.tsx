@@ -4,7 +4,6 @@ import { calculateTimeLeft, formatToDate } from 'helpers/timeFunctions';
 
 const Timer: React.FC = () => {
     const [timeUntilDailyReset, setTimeUntilDailyReset] = useState(calculateTimeLeft(endOfToday()));
-    console.log(new Date().getUTCHours());
     useEffect(() => {
         const timer = setTimeout(() => {
             setTimeUntilDailyReset(calculateTimeLeft(endOfToday()));
