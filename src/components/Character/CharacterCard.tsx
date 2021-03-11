@@ -17,7 +17,7 @@ const CharacterCard: React.FC<CharacterProps> = ({ className, level, name, index
     const dispatch = useAppDispatch();
 
     return (
-        <div className={`w-full lg:w-44 relative cursor-pointer border-accent-grey border-2 shadow-lg flex items-center h-20 rounded-md hover:ring-2 focus:ring-gray-300 ${selected ? "ring ring-gray-300 ring-offset-1" : ""}`} onClick={() => dispatch(setCharIndex(index))}>
+        <div className={`w-4/5 relative cursor-pointer border-accent-grey border-2 shadow-lg flex items-center h-20 rounded-md hover:ring-2 focus:ring-gray-300 ${selected ? "ring ring-gray-300 ring-offset-1" : ""}`} onClick={() => dispatch(setCharIndex(index))}>
             <img className="hidden lg:block w-12 h-12 m-2 rounded-full ring-1" src={`${process.env.PUBLIC_URL}/${Class[className]}.svg`} alt={`${Class[className]}`} />
             <div className="text-xs sm:text-sm lg:text-base">
                 <p>{name}</p>

@@ -11,8 +11,8 @@ const StyledCard = styled.div`
 const ContentContainer = () => {
 
     return (
-        <div className="py-10 px-20 relative grid grid-cols-mainLayout grid-rows-2">
-            <div className="row-span-2 mr-10">
+        <div className="py-10 pr-36 relative grid grid-cols-mainLayout grid-rows-2">
+            <div className="row-span-2 mx-10">
                 <ChecklistRenderer />
             </div>
             <StyledCard className="mb-10">
