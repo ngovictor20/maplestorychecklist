@@ -6,7 +6,7 @@ import ContentContainer from 'components/ContentContainer';
 
 const Container = styled.div`
     display: grid;
-    grid-template-columns: 12.5% auto; 
+    grid-template-columns: 25% auto; 
     width: 100vw;
 `;
 
