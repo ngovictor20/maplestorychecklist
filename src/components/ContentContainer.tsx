@@ -11,7 +11,7 @@ const StyledCard = styled.div`
 const ContentContainer = () => {
 
     return (
-        <div className="py-10 pr-36 relative grid grid-cols-mainLayout grid-rows-2">
+        <div className="py-10 sm:pr-10 lg:pr-36 relative grid grid-cols-mainLayout grid-rows-2">
             <div className="row-span-2 mx-10">
                 <ChecklistRenderer />
             </div>
