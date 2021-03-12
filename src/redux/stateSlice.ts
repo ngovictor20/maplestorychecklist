@@ -3,9 +3,9 @@ import checklistBase from "config/checklists";
 import { Character, Checklist, ChecklistType, FullChecklist } from "types";
 import { getChecklistByCharacterName, clearChecklist } from "redux/helpers";
 import { RootState } from "./store";
-import { ChecklistUpdateData, State, SubChecklistData } from "./types";
+import { AddChecklistData, ChecklistUpdateData, State, SubChecklistData } from "./types";
 import deepFreeze from 'deep-freeze';
-import { omit } from 'lodash';
+import { isEmpty, omit } from 'lodash';
 const initialState: State = {
   checklist: {
     dailyChecklist: {},
@@ -93,12 +93,23 @@ export const stateSlice = createSlice({
         localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
       }
     },
-    deleteChecklistItem: (state, action: PayloadAction<string>) => {
+    deleteChecklistItem: (state, action: PayloadAction<AddChecklistData>) => {
       const { checklistType, checklist } = current(state);
-      deepFreeze(checklist[checklistType]);
-      state.checklist[checklistType] = omit(checklist[checklistType], [action.payload]);
-      console.log(current(state).checklist[checklistType])
+      if(action.payload.heading){
+        deepFreeze(checklist[checklistType][action.payload.heading]);
+        // @ts-ignore
+        state.checklist[checklistType][action.payload.heading] = omit(checklist[checklistType][action.payload.heading], [action.payload.field]);
+      }else{
+        deepFreeze(checklist[checklistType]);
+        state.checklist[checklistType] = omit(checklist[checklistType], [action.payload.field]);
+      }
       localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+    },
+    addSubChecklist:(state, action: PayloadAction<AddChecklistData>) =>{
+
+    },
+    addSubChecklistItem:(state, action: PayloadAction<AddChecklistData>) =>{
+
     },
     clearExistingChecklist: (state) => {
       const { checklistType, checklist } = current(state);

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 interface SubChecklistProps {
     field: string;
+    heading: string;
     value: boolean;
     globalChecked: boolean;
     onChangeHandler: (field: string, value: boolean) => void;
@@ -17,7 +18,7 @@ const StyledLabel = styled.label`
     }
 `;
 
-const SubChecklistItem: React.FC<SubChecklistProps> = ({ field, globalChecked, value, onChangeHandler }) => {
+const SubChecklistItem: React.FC<SubChecklistProps> = ({ heading, field, globalChecked, value, onChangeHandler }) => {
     const [checked, setChecked] = useState(false);
     const dispatch = useAppDispatch();
     useEffect(() => {
@@ -38,7 +39,7 @@ const SubChecklistItem: React.FC<SubChecklistProps> = ({ field, globalChecked, v
                     }} />
                     <span className="ml-2">{field}</span>
                 </div>
-                <img onClick={() => { dispatch(deleteChecklistItem(field)) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
+                <img onClick={() => { dispatch(deleteChecklistItem({field, heading})) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
             </StyledLabel>
         </div>
     )

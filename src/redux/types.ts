@@ -16,4 +16,8 @@ interface SubChecklistData {
     data: Checklist;
 }
 
-export type { State, ChecklistUpdateData, SubChecklistData };
+interface AddChecklistData{
+    field: string;
+    heading?: string;
+  }
+export type { State, ChecklistUpdateData, SubChecklistData, AddChecklistData };

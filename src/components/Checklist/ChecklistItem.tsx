@@ -32,7 +32,7 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ field, value }) => {
                     }} />
                     <span className="ml-2">{field}</span>
                 </div>
-                <img onClick={() => { dispatch(deleteChecklistItem(field)) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
+                <img onClick={() => { dispatch(deleteChecklistItem({ field })) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
             </StyledLabel>
         </div>
     )

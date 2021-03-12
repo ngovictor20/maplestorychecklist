@@ -19,8 +19,8 @@ const ChecklistRenderer: React.FC = () => {
     const checklistType = useAppSelector(selectChecklistType);
     const checklist = useAppSelector(selectChecklist);
     const dispatch = useAppDispatch();
-    const renderHeader = ()=>{
-        switch(checklistType){
+    const renderHeader = () => {
+        switch (checklistType) {
             case ChecklistType.dailyChecklist:
                 return "Daily Checklist";
             case ChecklistType.shiftChecklist:
@@ -41,7 +41,6 @@ const ChecklistRenderer: React.FC = () => {
                             <ChecklistItem {...{ field, value }} key={field} />
                         )
                     }
-
                 })
             }
             <input type="text" onKeyDown={(e) => {

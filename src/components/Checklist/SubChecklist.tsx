@@ -41,13 +41,13 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
                     }} />
                     <span className="ml-2">{label}</span>
                 </div>
-                <img onClick={() => { dispatch(deleteChecklistItem(label)) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
+                <img onClick={() => { dispatch(deleteChecklistItem({field:label})) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
             </StyledLabel>
             <div className="ml-10">
                 {
                     Object.entries(checklist).map(([field, value]) => {
                         if (typeof value === 'boolean') {
-                            return <SubChecklistItem {...{ field, value, globalChecked: allChecked, onChangeHandler }} key={field} />
+                            return <SubChecklistItem {...{ heading:label, field, value, globalChecked: allChecked, onChangeHandler }} key={field} />
                         } else {
                             return undefined;
                         }
