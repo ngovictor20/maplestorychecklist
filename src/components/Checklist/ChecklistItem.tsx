@@ -24,15 +24,15 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ field, value }) => {
     }, [value])
     return (
         <div key={field} className="">
-            <StyledLabel className="flex items-center h-8 cursor-pointer justify-between hover:bg-gray-100">
-                <div>
-                <input type="checkbox" className="rounded text-pink-500" checked={checked} onChange={(e) => {
-                    setChecked(e.target.checked);
-                    dispatch(updateChecklistItem({ field }));
-                }} />
-                <span className="ml-2">{field}</span>
+            <StyledLabel className="flex items-center h-8 cursor-pointer justify-between hover:bg-gray-50">
+                <div className="inline-flex items-center">
+                    <input type="checkbox" className="rounded text-pink-500" checked={checked} onChange={(e) => {
+                        setChecked(e.target.checked);
+                        dispatch(updateChecklistItem({ field }));
+                    }} />
+                    <span className="ml-2">{field}</span>
                 </div>
-                <img onClick={() => {dispatch(deleteChecklistItem(field))}} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit"/>
+                <img onClick={() => { dispatch(deleteChecklistItem(field)) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
             </StyledLabel>
         </div>
     )

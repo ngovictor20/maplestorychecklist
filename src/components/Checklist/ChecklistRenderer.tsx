@@ -13,6 +13,8 @@ const StyledContainer = styled.div`
     overflow-y:auto;
 `;
 
+
+
 const ChecklistRenderer: React.FC = () => {
     const checklistType = useAppSelector(selectChecklistType);
     const checklist = useAppSelector(selectChecklist);
@@ -50,7 +52,7 @@ const ChecklistRenderer: React.FC = () => {
                         e.currentTarget.value = "";
                     }
                 }
-            }} className="mt-1 block w-40 rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
+            }} className="mt-2 block w-1/4 h-4  border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
         </StyledContainer>
     )
 }
