@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import { Checklist } from 'types'
 import SubChecklistItem from 'components/Checklist/SubChecklistItem';
 import { useAppDispatch } from 'redux/hooks';
-import { deleteChecklistItem, updateSubChecklist } from 'redux/stateSlice';
-import { mapValues } from 'lodash';
+import { addSubChecklistItem, deleteChecklistItem, updateSubChecklist } from 'redux/stateSlice';
+import { isEmpty, mapValues } from 'lodash';
 import styled from 'styled-components';
 
 interface ChecklistProps {
@@ -20,6 +20,7 @@ const StyledLabel = styled.label`
 
 const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
     const [allChecked, setAllChecked] = useState(false);
+    const [isAdding, setIsAdding] = useState(false);
     const dispatch = useAppDispatch();
     const onChangeHandler = (field: string, value: boolean) => {
         console.log("On change: ", field, value);
@@ -40,6 +41,7 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
                         changeAllFields(e.target.checked);
                     }} />
                     <span className="ml-2">{label}</span>
+                    <img onClick={()=>{setIsAdding(!isAdding)}} src={`${process.env.PUBLIC_URL}/add.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="add"/>
                 </div>
                 <img onClick={() => { dispatch(deleteChecklistItem({field:label})) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
             </StyledLabel>
@@ -54,6 +56,15 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
                     })
                 }
             </div>
+            <input type="text" onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                    const value = e.currentTarget.value;
+                    if (!isEmpty(value)) {
+                        dispatch(addSubChecklistItem({heading: label,field:e.currentTarget.value}))
+                        e.currentTarget.value = "";
+                    }
+                }
+            }} className={`ml-10 mt-2 w-1/4 h-4 ${isAdding ? "block" : "hidden"} border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}></input>
         </div>
     )
 }

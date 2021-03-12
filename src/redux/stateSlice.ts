@@ -64,7 +64,7 @@ export const stateSlice = createSlice({
         if (currentChecklist) {
           const checklist = JSON.parse(currentChecklist.toString());
           const clearedChecklist = clearChecklist(checklist);
-          localStorage.setItem(character.name, JSON.stringify({ ...clearedChecklist}))
+          localStorage.setItem(character.name, JSON.stringify({ ...clearedChecklist }))
         } else {
           localStorage.setItem(character.name, JSON.stringify({ ...checklistBase }))
         }
@@ -95,21 +95,35 @@ export const stateSlice = createSlice({
     },
     deleteChecklistItem: (state, action: PayloadAction<AddChecklistData>) => {
       const { checklistType, checklist } = current(state);
-      if(action.payload.heading){
+      if (action.payload.heading) {
         deepFreeze(checklist[checklistType][action.payload.heading]);
         // @ts-ignore
         state.checklist[checklistType][action.payload.heading] = omit(checklist[checklistType][action.payload.heading], [action.payload.field]);
-      }else{
+      } else {
         deepFreeze(checklist[checklistType]);
         state.checklist[checklistType] = omit(checklist[checklistType], [action.payload.field]);
       }
       localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
     },
-    addSubChecklist:(state, action: PayloadAction<AddChecklistData>) =>{
-
+    addSubChecklist: (state, action: PayloadAction<string>) => {
+      const { checklistType, checklist } = current(state);
+      // @ts-ignore
+      if (!(action.payload in checklist[checklistType])) {
+        // @ts-ignore
+        state.checklist[checklistType][action.payload.field] = {};
+        localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+      }
     },
-    addSubChecklistItem:(state, action: PayloadAction<AddChecklistData>) =>{
-
+    addSubChecklistItem: (state, action: PayloadAction<{ field: string, heading: string }>) => {
+      const { checklistType, checklist } = current(state);
+      if (typeof checklist[checklistType][action.payload.heading] !== 'boolean') {
+        // @ts-ignore
+        if (!(action.payload.field in checklist[checklistType][action.payload.heading])) {
+          // @ts-ignore
+          state.checklist[checklistType][action.payload.heading][action.payload.field] = false;
+          localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+        }
+      }
     },
     clearExistingChecklist: (state) => {
       const { checklistType, checklist } = current(state);
@@ -141,6 +155,7 @@ export const {
   deleteCharacter,
   updateSubChecklist,
   addChecklistItem,
+  addSubChecklistItem,
   deleteChecklistItem,
 } = stateSlice.actions;
 
