@@ -110,7 +110,7 @@ export const stateSlice = createSlice({
       // @ts-ignore
       if (!(action.payload in checklist[checklistType])) {
         // @ts-ignore
-        state.checklist[checklistType][action.payload.field] = {};
+        state.checklist[checklistType][action.payload] = {};
         localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
       }
     },
@@ -156,6 +156,7 @@ export const {
   updateSubChecklist,
   addChecklistItem,
   addSubChecklistItem,
+  addSubChecklist,
   deleteChecklistItem,
 } = stateSlice.actions;
 

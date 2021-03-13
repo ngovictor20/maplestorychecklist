@@ -59,7 +59,7 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
                     })
                 }
             </div>
-            <input type="text" onKeyDown={(e) => {
+            <input type="text" placeholder="Add checklist item..." onKeyDown={(e) => {
                 if (e.key === "Enter") {
                     const value = e.currentTarget.value;
                     if (!isEmpty(value)) {
@@ -67,7 +67,7 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
                         e.currentTarget.value = "";
                     }
                 }
-            }} className={`ml-10 mt-2 w-1/2 h-4 ${isAdding ? "block" : "hidden"} border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}></input>
+            }} className={`ml-10 ${isAdding ? "block" : "hidden"} border-0 border-gray-300 border-b-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}></input>
         </div>
     )
 }

@@ -2,7 +2,7 @@ import React from 'react';
 import ChecklistItem from 'components/Checklist/ChecklistItem';
 import SubChecklist from 'components/Checklist/SubChecklist';
 import { useAppDispatch, useAppSelector } from 'redux/hooks';
-import { addChecklistItem, selectChecklist, selectChecklistType } from 'redux/stateSlice';
+import { addChecklistItem, addSubChecklist, selectChecklist, selectChecklistType } from 'redux/stateSlice';
 import styled from 'styled-components';
 import { isEmpty } from 'lodash';
 import { ChecklistType } from 'types';
@@ -32,6 +32,15 @@ const ChecklistRenderer: React.FC = () => {
     return (
         <StyledContainer className="container w-full flex flex-col text-lg p-6 ">
             <h2 className="text-2xl sm:text-4xl lg:text-5xl leading-none font-bold text-gray-900 tracking-tight mb-5">{renderHeader()}</h2>
+            <input type="text" placeholder="Add checklist item.." onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                    const value = e.currentTarget.value;
+                    if (!isEmpty(value)) {
+                        dispatch(addChecklistItem(e.currentTarget.value))
+                        e.currentTarget.value = "";
+                    }
+                }
+            }} className="mb-1 block w-1/3 border-0 border-gray-300 border-b-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
             {
                 Object.entries(checklist[checklistType]).map(([field, value]) => {
                     if (typeof value !== 'boolean') {
@@ -43,15 +52,16 @@ const ChecklistRenderer: React.FC = () => {
                     }
                 })
             }
-            <input type="text" onKeyDown={(e) => {
+            
+            <input type="text" placeholder="Add category..." onKeyDown={(e) => {
                 if (e.key === "Enter") {
                     const value = e.currentTarget.value;
                     if (!isEmpty(value)) {
-                        dispatch(addChecklistItem(e.currentTarget.value))
+                        dispatch(addSubChecklist(e.currentTarget.value))
                         e.currentTarget.value = "";
                     }
                 }
-            }} className="mt-2 block w-1/2 h-4  border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
+            }} className="mt-2 block w-1/3 border-0 border-gray-300 border-b-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" />
         </StyledContainer>
     )
 }
