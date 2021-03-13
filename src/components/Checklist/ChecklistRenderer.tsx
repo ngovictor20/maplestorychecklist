@@ -69,7 +69,7 @@ const ChecklistRenderer: React.FC = () => {
                 }
               }
             }}
-            className="mb-1 block w-1/3 border-0 border-gray-300 border-b-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="mb-1 block border-0 border-gray-300 border-b-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
           {list}
         </div>
@@ -86,7 +86,7 @@ const ChecklistRenderer: React.FC = () => {
                 }
               }
             }}
-            className="mt-2 block w-1/3 border-0 border-gray-300 border-b-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
+            className="block border-0 border-gray-300 border-b-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"
           />
           {categoryList}
         </div>

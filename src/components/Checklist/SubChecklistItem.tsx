@@ -12,7 +12,6 @@ interface SubChecklistProps {
 }
 
 const StyledLabel = styled.label`
-  width: 50%;
   &:hover .hover-target {
     visibility: visible;
   }
@@ -48,7 +47,7 @@ const SubChecklistItem: React.FC<SubChecklistProps> = ({
               onChangeHandler(field, e.target.checked);
             }}
           />
-          <span className="ml-2">{field}</span>
+          <span className="ml-2 w-full">{field}</span>
         </div>
         <img
           onClick={() => {

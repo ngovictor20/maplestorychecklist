@@ -16,7 +16,7 @@ interface ChecklistProps {
 }
 
 const StyledLabel = styled.div`
-  width: 50%;
+  width: 100%;
   &:hover .hover-target {
     visibility: visible;
   }
@@ -80,7 +80,7 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
           />
         </div>
       </StyledLabel>
-      <div className="ml-10">
+      <div className="ml-6">
         {Object.entries(checklist).map(([field, value]) => {
           if (typeof value === "boolean") {
             return (
@@ -114,6 +114,7 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
                 })
               );
               e.currentTarget.value = "";
+              setIsAdding(false);
             }
           }
         }}
