@@ -1,6 +1,6 @@
 import AppRouter from "pages/AppRouter";
-import { Provider } from 'react-redux';
-import store from 'redux/store';
+import { Provider } from "react-redux";
+import store from "redux/store";
 
 function App() {
   return (
