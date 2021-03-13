@@ -11,7 +11,7 @@ interface ChecklistProps {
     checklist: Checklist;
 }
 
-const StyledLabel = styled.label`
+const StyledLabel = styled.div`
     width: 50%;
     &:hover .hover-target{
         visibility: visible;
@@ -34,22 +34,25 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
 
     return (
         <div>
-            <StyledLabel className="inline-flex items-center h-8 cursor-pointer justify-between">
+            <StyledLabel className="inline-flex items-center h-8 justify-between">
                 <div className="inline-flex items-center">
-                    <input type="checkbox" className="rounded text-pink-500" checked={allChecked} onChange={(e) => {
+                    <input type="checkbox" className="rounded text-pink-500 cursor-pointer" checked={allChecked} onChange={(e) => {
                         setAllChecked(e.target.checked);
                         changeAllFields(e.target.checked);
                     }} />
                     <span className="ml-2">{label}</span>
-                    <img onClick={()=>{setIsAdding(!isAdding)}} src={`${process.env.PUBLIC_URL}/add.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="add"/>
+
                 </div>
-                <img onClick={() => { dispatch(deleteChecklistItem({field:label})) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 m-1 hover:bg-blue-200 hover-target invisible`} alt="exit" />
+                <div className="inline-flex items-end gap-1">
+                    <img onClick={() => { setIsAdding(!isAdding) }} src={`${process.env.PUBLIC_URL}/add.svg`} className={`h-4 w-4 hover:bg-blue-200 hover-target invisible cursor-pointer `} alt="add" />
+                    <img onClick={() => { dispatch(deleteChecklistItem({ field: label })) }} src={`${process.env.PUBLIC_URL}/exit.svg`} className={`h-4 w-4 hover:bg-blue-200 hover-target invisible`} alt="exit" />
+                </div>
             </StyledLabel>
             <div className="ml-10">
                 {
                     Object.entries(checklist).map(([field, value]) => {
                         if (typeof value === 'boolean') {
-                            return <SubChecklistItem {...{ heading:label, field, value, globalChecked: allChecked, onChangeHandler }} key={field} />
+                            return <SubChecklistItem {...{ heading: label, field, value, globalChecked: allChecked, onChangeHandler }} key={field} />
                         } else {
                             return undefined;
                         }
@@ -60,11 +63,11 @@ const SubChecklist: React.FC<ChecklistProps> = ({ checklist, label }) => {
                 if (e.key === "Enter") {
                     const value = e.currentTarget.value;
                     if (!isEmpty(value)) {
-                        dispatch(addSubChecklistItem({heading: label,field:e.currentTarget.value}))
+                        dispatch(addSubChecklistItem({ heading: label, field: e.currentTarget.value }))
                         e.currentTarget.value = "";
                     }
                 }
-            }} className={`ml-10 mt-2 w-1/4 h-4 ${isAdding ? "block" : "hidden"} border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}></input>
+            }} className={`ml-10 mt-2 w-1/2 h-4 ${isAdding ? "block" : "hidden"} border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50`}></input>
         </div>
     )
 }

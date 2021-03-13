@@ -32,7 +32,7 @@ const SubChecklistItem: React.FC<SubChecklistProps> = ({ heading, field, globalC
         <div>
             <StyledLabel className="inline-flex items-center h-8 cursor-pointer justify-between hover:bg-gray-50">
                 <div className="inline-flex items-center">
-                    <input type="checkbox" className="rounded text-pink-500" checked={checked} onChange={(e) => {
+                    <input type="checkbox" className="rounded text-pink-500 cursor-pointer" checked={checked} onChange={(e) => {
                         console.log(e.target.checked)
                         setChecked(e.target.checked);
                         onChangeHandler(field, e.target.checked);

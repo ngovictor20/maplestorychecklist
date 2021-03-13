@@ -12,7 +12,7 @@ const Timer: React.FC = () => {
     });
     return (
         <div className="p-6">
-            <h2 className="text-xl sm:text-2xl lg:text-5xl leading-none font-extrabold text-gray-900 tracking-tight mb-5">Timers</h2>
+            <h2 className="text-xl sm:text-2xl lg:text-5xl leading-none font-bold text-gray-900 tracking-tight mb-5">Timers</h2>
             <p className="text-sm sm:text-base lg:text-lg">
                 {`Today's Reset - ${formatToDate(timeUntilDailyReset)}`}
             </p>

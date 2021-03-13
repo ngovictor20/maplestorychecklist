@@ -31,7 +31,7 @@ const ChecklistRenderer: React.FC = () => {
     }
     return (
         <StyledContainer className="container w-full flex flex-col text-lg p-6 ">
-            <h2 className="text-2xl sm:text-4xl lg:text-5xl leading-none font-extrabold text-gray-900 tracking-tight mb-5">{renderHeader()}</h2>
+            <h2 className="text-2xl sm:text-4xl lg:text-5xl leading-none font-bold text-gray-900 tracking-tight mb-5">{renderHeader()}</h2>
             {
                 Object.entries(checklist[checklistType]).map(([field, value]) => {
                     if (typeof value !== 'boolean') {
@@ -51,7 +51,7 @@ const ChecklistRenderer: React.FC = () => {
                         e.currentTarget.value = "";
                     }
                 }
-            }} className="mt-2 block w-1/4 h-4  border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
+            }} className="mt-2 block w-1/2 h-4  border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50"></input>
         </StyledContainer>
     )
 }

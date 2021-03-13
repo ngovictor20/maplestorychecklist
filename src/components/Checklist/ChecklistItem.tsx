@@ -26,7 +26,7 @@ const ChecklistItem: React.FC<ChecklistItemProps> = ({ field, value }) => {
         <div key={field} className="">
             <StyledLabel className="flex items-center h-8 cursor-pointer justify-between hover:bg-gray-50">
                 <div className="inline-flex items-center">
-                    <input type="checkbox" className="rounded text-pink-500" checked={checked} onChange={(e) => {
+                    <input type="checkbox" className="rounded text-pink-500 cursor-pointer" checked={checked} onChange={(e) => {
                         setChecked(e.target.checked);
                         dispatch(updateChecklistItem({ field }));
                     }} />
