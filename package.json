@@ -68,6 +68,7 @@
     "eslint-plugin-you-dont-need-momentjs": "^1.6.0",
     "gh-pages": "^3.1.0",
     "postcss": "^7.0.35",
+    "prettier-eslint": "^12.0.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.3"
   }
 }

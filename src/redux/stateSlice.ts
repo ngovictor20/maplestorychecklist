@@ -3,9 +3,14 @@ import checklistBase from "config/checklists";
 import { Character, Checklist, ChecklistType, FullChecklist } from "types";
 import { getChecklistByCharacterName, clearChecklist } from "redux/helpers";
 import { RootState } from "./store";
-import { AddChecklistData, ChecklistUpdateData, State, SubChecklistData } from "./types";
-import deepFreeze from 'deep-freeze';
-import { isEmpty, omit } from 'lodash';
+import {
+  AddChecklistData,
+  ChecklistUpdateData,
+  State,
+  SubChecklistData,
+} from "./types";
+import deepFreeze from "deep-freeze";
+import { isEmpty, omit } from "lodash";
 const initialState: State = {
   checklist: {
     dailyChecklist: {},
@@ -15,7 +20,7 @@ const initialState: State = {
   characters: [],
   characterIndex: 0,
   checklistType: ChecklistType.dailyChecklist,
-}
+};
 
 export const stateSlice = createSlice({
   name: "state",
@@ -32,16 +37,25 @@ export const stateSlice = createSlice({
     },
     addChar: (state, action: PayloadAction<Character>) => {
       state.characters.push(action.payload);
-      localStorage.setItem("characters", JSON.stringify(current(state).characters));
+      localStorage.setItem(
+        "characters",
+        JSON.stringify(current(state).characters)
+      );
     },
-    updateChecklistItem: (state, action: PayloadAction<ChecklistUpdateData>) => {
+    updateChecklistItem: (
+      state,
+      action: PayloadAction<ChecklistUpdateData>
+    ) => {
       const { field } = action.payload;
       const { checklistType, characters, checklist, characterIndex } = state;
       state.checklist[checklistType][field] = !checklist[checklistType][field];
-      localStorage.setItem(characters[characterIndex].name, JSON.stringify(current(state).checklist));
+      localStorage.setItem(
+        characters[characterIndex].name,
+        JSON.stringify(current(state).checklist)
+      );
     },
     setCharIndex: (state, action: PayloadAction<number>) => {
-      const { name } = state.characters[action.payload]
+      const { name } = state.characters[action.payload];
       state.checklist = getChecklistByCharacterName(name);
       state.characterIndex = action.payload;
     },
@@ -52,11 +66,17 @@ export const stateSlice = createSlice({
           const checklist = JSON.parse(currentChecklist.toString());
           const { weeklyBosses } = checklist;
           const clearedChecklist = clearChecklist(checklist);
-          localStorage.setItem(character.name, JSON.stringify({ ...clearedChecklist, weeklyBosses }))
+          localStorage.setItem(
+            character.name,
+            JSON.stringify({ ...clearedChecklist, weeklyBosses })
+          );
         } else {
-          localStorage.setItem(character.name, JSON.stringify({ ...checklistBase }))
+          localStorage.setItem(
+            character.name,
+            JSON.stringify({ ...checklistBase })
+          );
         }
-      })
+      });
     },
     weeklyResetChecklists: (state) => {
       current(state).characters.forEach((character) => {
@@ -64,33 +84,52 @@ export const stateSlice = createSlice({
         if (currentChecklist) {
           const checklist = JSON.parse(currentChecklist.toString());
           const clearedChecklist = clearChecklist(checklist);
-          localStorage.setItem(character.name, JSON.stringify({ ...clearedChecklist }))
+          localStorage.setItem(
+            character.name,
+            JSON.stringify({ ...clearedChecklist })
+          );
         } else {
-          localStorage.setItem(character.name, JSON.stringify({ ...checklistBase }))
+          localStorage.setItem(
+            character.name,
+            JSON.stringify({ ...checklistBase })
+          );
         }
-      })
+      });
     },
     resetChecklists: (state) => {
       const { characters } = current(state);
       characters.forEach((character) => {
-        localStorage.setItem(character.name, JSON.stringify({ ...checklistBase }))
-      })
+        localStorage.setItem(
+          character.name,
+          JSON.stringify({ ...checklistBase })
+        );
+      });
     },
     deleteCharacter: (state, action: PayloadAction<number>) => {
       const { name } = state.characters[action.payload];
       localStorage.removeItem(name);
       state.characters.splice(action.payload, 1);
-      localStorage.setItem('characters', JSON.stringify(current(state).characters));
+      localStorage.setItem(
+        "characters",
+        JSON.stringify(current(state).characters)
+      );
     },
     updateSubChecklist: (state, action: PayloadAction<SubChecklistData>) => {
-      state.checklist[state.checklistType][action.payload.field] = action.payload.data;
-      localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+      state.checklist[state.checklistType][action.payload.field] =
+        action.payload.data;
+      localStorage.setItem(
+        state.characters[state.characterIndex].name,
+        JSON.stringify(current(state).checklist)
+      );
     },
     addChecklistItem: (state, action: PayloadAction<string>) => {
       const { checklistType, checklist } = current(state);
       if (!(action.payload in checklist[checklistType])) {
         state.checklist[checklistType][action.payload] = false;
-        localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+        localStorage.setItem(
+          state.characters[state.characterIndex].name,
+          JSON.stringify(current(state).checklist)
+        );
       }
     },
     deleteChecklistItem: (state, action: PayloadAction<AddChecklistData>) => {
@@ -98,12 +137,21 @@ export const stateSlice = createSlice({
       if (action.payload.heading) {
         deepFreeze(checklist[checklistType][action.payload.heading]);
         // @ts-ignore
-        state.checklist[checklistType][action.payload.heading] = omit(checklist[checklistType][action.payload.heading], [action.payload.field]);
+        state.checklist[checklistType][action.payload.heading] = omit(
+          // @ts-ignore
+          checklist[checklistType][action.payload.heading],
+          [action.payload.field]
+        );
       } else {
         deepFreeze(checklist[checklistType]);
-        state.checklist[checklistType] = omit(checklist[checklistType], [action.payload.field]);
+        state.checklist[checklistType] = omit(checklist[checklistType], [
+          action.payload.field,
+        ]);
       }
-      localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+      localStorage.setItem(
+        state.characters[state.characterIndex].name,
+        JSON.stringify(current(state).checklist)
+      );
     },
     addSubChecklist: (state, action: PayloadAction<string>) => {
       const { checklistType, checklist } = current(state);
@@ -111,31 +159,55 @@ export const stateSlice = createSlice({
       if (!(action.payload in checklist[checklistType])) {
         // @ts-ignore
         state.checklist[checklistType][action.payload] = {};
-        localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+        localStorage.setItem(
+          state.characters[state.characterIndex].name,
+          JSON.stringify(current(state).checklist)
+        );
       }
     },
-    addSubChecklistItem: (state, action: PayloadAction<{ field: string, heading: string }>) => {
+    addSubChecklistItem: (
+      state,
+      action: PayloadAction<{ field: string; heading: string }>
+    ) => {
       const { checklistType, checklist } = current(state);
-      if (typeof checklist[checklistType][action.payload.heading] !== 'boolean') {
-        // @ts-ignore
-        if (!(action.payload.field in checklist[checklistType][action.payload.heading])) {
+      if (
+        typeof checklist[checklistType][action.payload.heading] !== "boolean"
+      ) {
+        if (
+          !(
+            action.payload.field in
+            // @ts-ignore
+            checklist[checklistType][action.payload.heading]
+          )
+        ) {
           // @ts-ignore
-          state.checklist[checklistType][action.payload.heading][action.payload.field] = false;
-          localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+          state.checklist[checklistType][action.payload.heading][
+            action.payload.field
+          ] = false;
+          localStorage.setItem(
+            state.characters[state.characterIndex].name,
+            JSON.stringify(current(state).checklist)
+          );
         }
       }
     },
     clearExistingChecklist: (state) => {
       const { checklistType, checklist } = current(state);
       state.checklist[checklistType] = clearChecklist(checklist[checklistType]);
-      localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+      localStorage.setItem(
+        state.characters[state.characterIndex].name,
+        JSON.stringify(current(state).checklist)
+      );
     },
     clearCharacterChecklist: (state) => {
       const { checklist } = current(state);
       const clearedChecklist = clearChecklist(checklist);
       //@ts-ignore
       state.checklist = { ...clearedChecklist };
-      localStorage.setItem(state.characters[state.characterIndex].name, JSON.stringify(current(state).checklist));
+      localStorage.setItem(
+        state.characters[state.characterIndex].name,
+        JSON.stringify(current(state).checklist)
+      );
     },
   },
 });
