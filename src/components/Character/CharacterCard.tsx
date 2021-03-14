@@ -43,7 +43,6 @@ const CharacterCard: React.FC<CharacterProps> = ({
   const [readOnlyMode, setReadOnlyMode] = useState<boolean>(true);
   const [newName, setNewName] = useState<string>(name);
   const [newLevel, setNewLevel] = useState<number>(level);
-  console.log("log");
   return (
     <StyledContainer
       className={`w-4/5 relative cursor-pointer border-accent-grey border-2 shadow-lg flex items-center h-20 rounded-md hover:ring-2 focus:ring-gray-300 ${
