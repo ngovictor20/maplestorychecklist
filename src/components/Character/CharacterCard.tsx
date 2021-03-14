@@ -22,6 +22,14 @@ const StyledContainer = styled.div`
   input:read-only {
     border: 0px;
   }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
 `;
 const CharacterCard: React.FC<CharacterProps> = ({
   className,
@@ -33,6 +41,8 @@ const CharacterCard: React.FC<CharacterProps> = ({
 }) => {
   const dispatch = useAppDispatch();
   const [readOnlyMode, setReadOnlyMode] = useState<boolean>(true);
+  const [newName, setNewName] = useState<string>(name);
+  const [newLevel, setNewLevel] = useState<number>(level);
   console.log("log");
   return (
     <StyledContainer
@@ -54,14 +64,20 @@ const CharacterCard: React.FC<CharacterProps> = ({
             className={`w-full p-0 border-0 ${
               readOnlyMode ? "" : "border-gray-300 border-b-2"
             }`}
+            onChange={(e) => {
+              setNewName(e.currentTarget.value);
+            }}
             placeholder={name}
           ></StyledInput>
           <StyledInput
-            type="text"
+            type="number"
             readOnly={readOnlyMode}
             className={`w-full p-0 border-0 ${
               readOnlyMode ? "" : "border-gray-300 border-b-2"
             }`}
+            onChange={(e) => {
+              setNewLevel(Number(e.currentTarget.value));
+            }}
             placeholder={level.toString()}
           ></StyledInput>
         </div>
@@ -79,8 +95,18 @@ const CharacterCard: React.FC<CharacterProps> = ({
               if (readOnlyMode) {
                 setReadOnlyMode(!readOnlyMode);
               } else {
-                console.log({ name, class: className, level });
-                //dispatch(updateCharacter({ name, class: className, level }));
+                console.log({
+                  name: newName,
+                  class: className,
+                  level: newLevel,
+                });
+                dispatch(
+                  updateCharacter({
+                    name: newName,
+                    class: className,
+                    level: newLevel,
+                  })
+                );
               }
             }}
             src={`${process.env.PUBLIC_URL}/${
