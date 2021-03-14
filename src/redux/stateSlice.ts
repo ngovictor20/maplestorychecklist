@@ -35,6 +35,13 @@ export const stateSlice = createSlice({
     setChecklistType: (state, action: PayloadAction<ChecklistType>) => {
       state.checklistType = action.payload;
     },
+    updateCharacter: (state, action: PayloadAction<Character>) => {
+      state.characters[state.characterIndex] = action.payload;
+      localStorage.setItem(
+        "characters",
+        JSON.stringify(current(state).characters)
+      );
+    },
     addChar: (state, action: PayloadAction<Character>) => {
       state.characters.push(action.payload);
       localStorage.setItem(
@@ -217,6 +224,7 @@ export const {
   setCharIndex,
   updateCharList,
   addChar,
+  updateCharacter,
   updateChecklistItem,
   dailyResetChecklists,
   weeklyResetChecklists,

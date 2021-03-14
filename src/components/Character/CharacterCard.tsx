@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useAppDispatch } from "redux/hooks";
-import { setCharIndex } from "redux/stateSlice";
+import { setCharIndex, updateCharacter } from "redux/stateSlice";
 import { Class } from "types";
 import { DialogType } from "components/Dialog/types";
+import styled from "styled-components";
 interface CharacterProps {
   name: string;
   className: Class;
@@ -12,6 +13,24 @@ interface CharacterProps {
   toggleDialog: (type: DialogType) => void;
 }
 
+const StyledInput = styled.input`
+  height: 30%;
+  width: 100%;
+`;
+
+const StyledContainer = styled.div`
+  input:read-only {
+    border: 0px;
+  }
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  input[type="number"] {
+    -moz-appearance: textfield;
+  }
+`;
 const CharacterCard: React.FC<CharacterProps> = ({
   className,
   level,
@@ -21,9 +40,11 @@ const CharacterCard: React.FC<CharacterProps> = ({
   toggleDialog,
 }) => {
   const dispatch = useAppDispatch();
-
+  const [readOnlyMode, setReadOnlyMode] = useState<boolean>(true);
+  const [newName, setNewName] = useState<string>(name);
+  const [newLevel, setNewLevel] = useState<number>(level);
   return (
-    <div
+    <StyledContainer
       className={`w-4/5 relative cursor-pointer border-accent-grey border-2 shadow-lg flex items-center h-20 rounded-md hover:ring-2 focus:ring-gray-300 ${
         selected ? "ring ring-gray-300 ring-offset-1" : ""
       }`}
@@ -34,21 +55,64 @@ const CharacterCard: React.FC<CharacterProps> = ({
         src={`${process.env.PUBLIC_URL}/${Class[className]}.svg`}
         alt={`${Class[className]}`}
       />
-      <div className="text-xs sm:text-sm lg:text-base">
-        <p>{name}</p>
-        <p>{level}</p>
+      <div className="grid grid-cols-2 h-full">
+        <div className="text-xs sm:text-sm lg:text-base flex flex-col justify-center">
+          <StyledInput
+            type="text"
+            readOnly={readOnlyMode}
+            className={`w-full p-0 border-0 ${
+              readOnlyMode ? "" : "border-gray-300 border-b-2"
+            }`}
+            onChange={(e) => {
+              setNewName(e.currentTarget.value);
+            }}
+            placeholder={name}
+          ></StyledInput>
+          <StyledInput
+            type="number"
+            readOnly={readOnlyMode}
+            className={`w-full p-0 border-0 ${
+              readOnlyMode ? "" : "border-gray-300 border-b-2"
+            }`}
+            onChange={(e) => {
+              setNewLevel(Number(e.currentTarget.value));
+            }}
+            placeholder={level.toString()}
+          ></StyledInput>
+        </div>
+        <div className="flex flex-col justify-center pr-2 items-center">
+          <img
+            src={`${process.env.PUBLIC_URL}/exit.svg`}
+            className="self-end"
+            alt="exit"
+            onClick={() => {
+              toggleDialog(DialogType.deleteCharacter);
+            }}
+          />
+          <img
+            onClick={() => {
+              if (readOnlyMode) {
+                setReadOnlyMode(!readOnlyMode);
+              } else {
+                dispatch(
+                  updateCharacter({
+                    name: newName,
+                    class: className,
+                    level: newLevel,
+                  })
+                );
+                setReadOnlyMode(!readOnlyMode);
+              }
+            }}
+            src={`${process.env.PUBLIC_URL}/${
+              readOnlyMode ? "edit" : "add"
+            }.svg`}
+            className="self-end"
+            alt="exit"
+          />
+        </div>
       </div>
-      <img
-        onClick={() => {
-          toggleDialog(DialogType.deleteCharacter);
-        }}
-        src={`${process.env.PUBLIC_URL}/exit.svg`}
-        className={`absolute top-0 right-0 h-2 w-2 m-1 hover:bg-blue-200 ${
-          selected ? "" : ""
-        }`}
-        alt="exit"
-      />
-    </div>
+    </StyledContainer>
   );
 };
 

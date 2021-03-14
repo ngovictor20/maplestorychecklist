@@ -12,6 +12,7 @@ interface SubChecklistProps {
 }
 
 const StyledLabel = styled.label`
+  width: 100%;
   &:hover .hover-target {
     visibility: visible;
   }
