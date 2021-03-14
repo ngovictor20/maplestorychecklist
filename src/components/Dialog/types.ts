@@ -1,6 +1,7 @@
-export enum DialogType{
-    deleteCharacter,
-    addCharacter,
-    deleteStorage,
-    informReset
+export enum DialogType {
+  deleteCharacter,
+  addCharacter,
+  deleteStorage,
+  informReset,
+  resetAllChecklists,
 }

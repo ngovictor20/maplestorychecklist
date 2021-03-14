@@ -2,15 +2,13 @@ interface Checklist {
   [key: string]: boolean | Checklist;
 }
 
-
-
 interface Character {
   name: string;
   class: Class;
   level: number;
 }
 
-enum ChecklistType{
+enum ChecklistType {
   dailyChecklist = "dailyChecklist",
   weeklyBosses = "weeklyBosses",
   shiftChecklist = "shiftChecklist",

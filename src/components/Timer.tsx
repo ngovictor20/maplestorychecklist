@@ -1,32 +1,27 @@
-import React, { useEffect, useState } from 'react'
-import { differenceInMilliseconds, endOfISOWeek, endOfToday } from 'date-fns';
+import React, { useEffect, useState } from "react";
+import { endOfToday } from "date-fns";
+import { calculateTimeLeft, formatToDate } from "helpers/timeFunctions";
 
 const Timer: React.FC = () => {
-    const calculateTimeLeft = (resetDate: Date) => {
-        const currentDate = new Date();
-        const difference = differenceInMilliseconds(resetDate, currentDate);
-        return {
-            days: Math.floor(difference / (1000 * 60 * 60 * 24)),
-            hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
-            minutes: Math.floor((difference / 1000 / 60) % 60),
-            seconds: Math.floor((difference / 1000) % 60)
-        }
-    }
-    const [timeUntilDailyReset, setTimeUntilDailyReset] = useState(calculateTimeLeft(endOfToday()));
+  const [timeUntilDailyReset, setTimeUntilDailyReset] = useState(
+    calculateTimeLeft(endOfToday())
+  );
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setTimeUntilDailyReset(calculateTimeLeft(endOfToday()));
+    }, 1000);
+    return () => clearTimeout(timer);
+  });
+  return (
+    <div className="p-6">
+      <h2 className="text-xl sm:text-2xl lg:text-5xl leading-none font-bold text-gray-900 tracking-tight mb-5">
+        Timers
+      </h2>
+      <p className="text-sm sm:text-base lg:text-lg">
+        {`Today's Reset - ${formatToDate(timeUntilDailyReset)}`}
+      </p>
+    </div>
+  );
+};
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            setTimeUntilDailyReset(calculateTimeLeft(endOfToday()));
-        }, 1000);
-        return () => clearTimeout(timer);
-    });
-    return (
-        <div>
-            <p>
-                {`Time Until Today's Reset ${timeUntilDailyReset.days} Days, ${timeUntilDailyReset.hours}:${timeUntilDailyReset.minutes}:${timeUntilDailyReset.seconds}`}
-            </p>
-        </div>
-    )
-}
-
-export default Timer
+export default Timer;
