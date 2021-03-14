@@ -95,11 +95,6 @@ const CharacterCard: React.FC<CharacterProps> = ({
               if (readOnlyMode) {
                 setReadOnlyMode(!readOnlyMode);
               } else {
-                console.log({
-                  name: newName,
-                  class: className,
-                  level: newLevel,
-                });
                 dispatch(
                   updateCharacter({
                     name: newName,
@@ -107,6 +102,7 @@ const CharacterCard: React.FC<CharacterProps> = ({
                     level: newLevel,
                   })
                 );
+                setReadOnlyMode(!readOnlyMode);
               }
             }}
             src={`${process.env.PUBLIC_URL}/${
