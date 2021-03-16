@@ -61,7 +61,7 @@ const CharacterCard: React.FC<CharacterProps> = ({
             type="text"
             readOnly={readOnlyMode}
             className={`w-full p-0 border-0 ${
-              readOnlyMode ? "" : "border-gray-300 border-b-2"
+              readOnlyMode ? "" : "border-gray-300 border-b"
             }`}
             onChange={(e) => {
               setNewName(e.currentTarget.value);
@@ -72,7 +72,7 @@ const CharacterCard: React.FC<CharacterProps> = ({
             type="number"
             readOnly={readOnlyMode}
             className={`w-full p-0 border-0 ${
-              readOnlyMode ? "" : "border-gray-300 border-b-2"
+              readOnlyMode ? "" : "border-gray-300 border-b"
             }`}
             onChange={(e) => {
               setNewLevel(Number(e.currentTarget.value));
@@ -105,7 +105,7 @@ const CharacterCard: React.FC<CharacterProps> = ({
               }
             }}
             src={`${process.env.PUBLIC_URL}/${
-              readOnlyMode ? "edit" : "add"
+              readOnlyMode ? "edit" : "checkmark"
             }.svg`}
             className="self-end"
             alt="exit"

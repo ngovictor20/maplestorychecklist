@@ -35,6 +35,7 @@ module.exports = {
       colors: {
         "header-grey": "#45547F",
         "accent-grey": "#737687",
+        "alert-red": "#F15259",
       },
       gridTemplateColumns: {
         mainLayout: "75% 25%",
