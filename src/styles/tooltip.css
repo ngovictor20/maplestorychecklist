@@ -1,0 +1,5 @@
+.tooltip {
+  outline: 2px white solid !important;
+  border: 2px #0c0c0fab solid !important;
+  background-color: #0c0c0fdd !important;
+}

@@ -51,7 +51,7 @@ const Header = () => {
           onClick={() => {
             toggleDialog(DialogType.deleteStorage);
           }}
-          className={NavItemClass}
+          className="hover:bg-alert-red h-full cursor-pointer px-3 flex items-center text-right"
         >
           <p>Clear Data</p>
         </div>

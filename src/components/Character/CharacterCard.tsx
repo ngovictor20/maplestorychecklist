@@ -4,6 +4,9 @@ import { setCharIndex, updateCharacter } from "redux/stateSlice";
 import { Class } from "types";
 import { DialogType } from "components/Dialog/types";
 import styled from "styled-components";
+import ReactTooltip from "react-tooltip";
+import "styles/tooltip.css";
+
 interface CharacterProps {
   name: string;
   className: Class;
@@ -12,6 +15,12 @@ interface CharacterProps {
   selected?: boolean;
   toggleDialog: (type: DialogType) => void;
 }
+
+const TooltipProps = {
+  type: "info",
+  className: "tooltip",
+  arrowColor: "#0c0c0fdd",
+};
 
 const StyledInput = styled.input`
   height: 30%;
@@ -43,6 +52,7 @@ const CharacterCard: React.FC<CharacterProps> = ({
   const [readOnlyMode, setReadOnlyMode] = useState<boolean>(true);
   const [newName, setNewName] = useState<string>(name);
   const [newLevel, setNewLevel] = useState<number>(level);
+
   return (
     <StyledContainer
       className={`w-4/5 relative cursor-pointer border-accent-grey border-2 shadow-lg flex items-center h-20 rounded-md hover:ring-2 focus:ring-gray-300 ${
@@ -61,7 +71,7 @@ const CharacterCard: React.FC<CharacterProps> = ({
             type="text"
             readOnly={readOnlyMode}
             className={`w-full p-0 border-0 ${
-              readOnlyMode ? "" : "border-gray-300 border-b-2"
+              readOnlyMode ? "" : "border-gray-300 border-b"
             }`}
             onChange={(e) => {
               setNewName(e.currentTarget.value);
@@ -72,7 +82,7 @@ const CharacterCard: React.FC<CharacterProps> = ({
             type="number"
             readOnly={readOnlyMode}
             className={`w-full p-0 border-0 ${
-              readOnlyMode ? "" : "border-gray-300 border-b-2"
+              readOnlyMode ? "" : "border-gray-300 border-b"
             }`}
             onChange={(e) => {
               setNewLevel(Number(e.currentTarget.value));
@@ -105,13 +115,20 @@ const CharacterCard: React.FC<CharacterProps> = ({
               }
             }}
             src={`${process.env.PUBLIC_URL}/${
-              readOnlyMode ? "edit" : "add"
+              readOnlyMode ? "edit" : "checkmark"
             }.svg`}
             className="self-end"
             alt="exit"
+            data-tip
+            data-for="edit-tip"
           />
         </div>
       </div>
+      {readOnlyMode && (
+        <ReactTooltip id="edit-tip" {...{ TooltipProps }}>
+          <span>Edit character information</span>
+        </ReactTooltip>
+      )}
     </StyledContainer>
   );
 };
