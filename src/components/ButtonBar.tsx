@@ -7,10 +7,18 @@ import { useAppDispatch } from "redux/hooks";
 import useDialog from "components/Dialog/useDialog";
 import { DialogType } from "components/Dialog/types";
 import ReactTooltip from "react-tooltip";
+import "styles/tooltip.css";
+
+const TooltipProps = {
+  type: "info",
+  className: "tooltip",
+  arrowColor: "#0c0c0fdd",
+};
 
 const ButtonBar = () => {
   const dispatch = useAppDispatch();
   const { renderDialog, toggleDialog } = useDialog();
+
   return (
     <div className="p2 sm:p-3 lg:p-6 flex flex-col items-center gap-3 text-xs sm:text-sm lg:text-base">
       {renderDialog()}
@@ -45,16 +53,16 @@ const ButtonBar = () => {
         Clear All Checklist
       </div>
 
-      <ReactTooltip id="reset-all-checklists" type="info" multiline>
+      <ReactTooltip id="reset-all-checklists" {...{ TooltipProps }}>
         <span>
           Click this button to reset all character's checklists to the original
           checklist. <br /> This will wipe any custom checklists
         </span>
       </ReactTooltip>
-      <ReactTooltip id="clear-checklist" type="info">
+      <ReactTooltip id="clear-checklist" {...{ TooltipProps }}>
         <span>Unchecks all the boxes in the currently viewed checklist</span>
       </ReactTooltip>
-      <ReactTooltip id="clear-current-checklists" type="info">
+      <ReactTooltip id="clear-current-checklists" {...{ TooltipProps }}>
         <span>
           Unchecks all boxes in all checklists for the current character
         </span>
