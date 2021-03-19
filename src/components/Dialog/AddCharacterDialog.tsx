@@ -6,9 +6,6 @@ import { useAppDispatch } from "redux/hooks";
 
 interface DialogProps {
   setDialogOpen: (arg: boolean) => void;
-  setIsLoading: (arg: boolean) => void;
-  setIsError: (arg: boolean) => void;
-  setErrorMsg: (arg: string) => void;
 }
 
 const StyledForm = styled.div`
@@ -23,12 +20,7 @@ const StyledForm = styled.div`
 const InputClass =
   "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50";
 
-const AddPictureDialog: React.FC<DialogProps> = ({
-  setDialogOpen,
-  setIsLoading,
-  setIsError,
-  setErrorMsg,
-}) => {
+const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen }) => {
   const [name, setName] = useState("");
   const [job, setJob] = useState<Class>(Class.magician);
   const [level, setLevel] = useState(0);

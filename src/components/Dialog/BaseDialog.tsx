@@ -4,17 +4,19 @@ import { DialogType } from "components/Dialog/types";
 import { deleteCharacter, resetChecklists } from "redux/stateSlice";
 import { useAppDispatch, useAppSelector } from "redux/hooks";
 import ConfirmDialog from "components/Dialog/ConfirmDialog";
+import styled from "styled-components";
 
 interface DialogProps {
   setDialogOpen: (arg: boolean) => void;
   type: DialogType;
 }
 
+const StyledDiv = styled.div`
+  background-color: #2e9cd7;
+`;
+
 const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
   const [header, setHeader] = useState("Dialog");
-  const [isError, setIsError] = useState(false);
-  const [errorMsg, setErrorMsg] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const charIndex = useAppSelector((state) => state.characterIndex);
   const dispatch = useAppDispatch();
 
@@ -36,19 +38,13 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
   const renderContent = () => {
     switch (type) {
       case DialogType.addCharacter:
-        return (
-          <AddCharacterDialog
-            setDialogOpen={setDialogOpen}
-            setIsError={setIsError}
-            setErrorMsg={setErrorMsg}
-            setIsLoading={setIsLoading}
-          />
-        );
+        return <AddCharacterDialog setDialogOpen={setDialogOpen} />;
       case DialogType.deleteCharacter:
         return (
           <ConfirmDialog
             {...{
               confirmMessage: "Are you sure you want to delete this character?",
+              setDialogOpen,
               onConfirm: () => {
                 dispatch(deleteCharacter(charIndex));
                 setDialogOpen(false);
@@ -62,6 +58,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
             {...{
               confirmMessage:
                 "Are you sure you want to wipe your character data?",
+              setDialogOpen,
               onConfirm: () => {
                 localStorage.clear();
                 setDialogOpen(false);
@@ -75,6 +72,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
           <ConfirmDialog
             {...{
               confirmMessage: "Your checklists have been reset!",
+              setDialogOpen,
               onConfirm: () => {
                 setDialogOpen(false);
               },
@@ -87,6 +85,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
             {...{
               confirmMessage:
                 "Are you sure you want to reset all your checklists to the original list? This cannot be undone.",
+              setDialogOpen,
               onConfirm: () => {
                 dispatch(resetChecklists());
                 setDialogOpen(false);
@@ -102,18 +101,9 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
 
   return (
     <div className="fixed h-full w-screen z-50 inset-0 bg-gray-300 bg-opacity-75 flex justify-center items-center">
-      <span className="relative inset-0 flex flex-col bg-white max-w-1/2 min-w-1/4 max-h-full rounded-lg text-black">
-        <p className="underline text-center h-18 text-2xl font-bold p-5">
-          {header}
-        </p>
-        <img
-          onClick={() => setDialogOpen(false)}
-          src={`${process.env.PUBLIC_URL}/exit.svg`}
-          className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200"
-          alt="exit"
-        />
+      <StyledDiv className="relative min-w-1/3 h-1/3 rounded-2xl text-black">
         {renderContent()}
-      </span>
+      </StyledDiv>
     </div>
   );
 };
