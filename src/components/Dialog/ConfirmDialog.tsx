@@ -13,27 +13,44 @@ const StyledBackground = styled.div`
   height: calc(100% - 3rem);
 `;
 
+const StyledButton = styled.button`
+  background: linear-gradient(180deg, #ddff00 0%, #88cc00 100%);
+`;
+
 const StyledContent = styled.div``;
 const ConfirmDialog: React.FC<DialogProps> = ({
   setDialogOpen,
   confirmMessage,
+  onConfirm,
 }) => {
   return (
     <div className="flex flex-col h-full content-center">
-      <StyledBackground className="rounded-2xl m-2 flex items-center px-1 py-2">
-        <div className="flex justify-center w-1/3 h-full p-4 border-r border-gray-300">
-          <img src={`${process.env.PUBLIC_URL}/admin.png`} className="h-3/4" />
-        </div>
-        <StyledContent className="bg-white ml-4 mr-1 h-full rounded-2xl">
-          <p className="text-xl self-center text-center">{confirmMessage}</p>
+      <StyledBackground className="rounded-xl m-3 mb-2 flex items-center px-1 py-4">
+        <div className="flex content-center justify-center w-1/3 h-full p-4 border-r-2 border-gray-200">
           <img
-            onClick={() => setDialogOpen(false)}
-            src={`${process.env.PUBLIC_URL}/exit.svg`}
-            className="absolute top-0 right-0 h-4 w-4 m-3 hover:bg-blue-200"
-            alt="exit"
+            src={`${process.env.PUBLIC_URL}/admin.png`}
+            className="self-center"
+            alt=""
           />
+        </div>
+        <StyledContent className="relative flex bg-white ml-4 mr-1 h-full rounded-xl">
+          <p className="text-base self-center text-center text-gray-500">
+            {confirmMessage}
+          </p>
         </StyledContent>
+        <img
+          onClick={() => setDialogOpen(false)}
+          src={`${process.env.PUBLIC_URL}/exit.svg`}
+          className="absolute top-0 right-0 h-4 w-4 m-4 hover:bg-blue-200"
+          alt="exit"
+        />
       </StyledBackground>
+      <StyledButton
+        className="self-end mr-4 h-6 w-16 text-sm rounded-md text-white"
+        onClick={onConfirm}
+      >
+        OK
+      </StyledButton>
     </div>
   );
 };
