@@ -17,27 +17,26 @@ const StyledButton = styled.button`
   background: linear-gradient(180deg, #ddff00 0%, #88cc00 100%);
 `;
 
-const StyledContent = styled.div``;
 const ConfirmDialog: React.FC<DialogProps> = ({
   setDialogOpen,
   confirmMessage,
   onConfirm,
 }) => {
   return (
-    <div className="flex flex-col h-full content-center">
-      <StyledBackground className="rounded-xl m-3 mb-2 flex items-center px-1 py-4">
-        <div className="flex content-center justify-center w-1/3 h-full p-2 border-r-2 border-gray-200">
+    <div className="flex flex-col h-1/4 content-center">
+      <StyledBackground className="rounded-xl m-3 mb-1 flex items-center px-1 py-4">
+        <div className="flex content-center justify-center w-1/4 h-full p-4 border-r-2 border-gray-200">
           <img
             src={`${process.env.PUBLIC_URL}/admin.png`}
             className="self-center"
             alt=""
           />
         </div>
-        <StyledContent className="relative flex bg-white ml-4 mr-1 h-full rounded-xl">
+        <div className="relative flex bg-white ml-4 mr-1 p-6 h-full w-full rounded-xl flex flex-col">
           <p className="text-base self-center text-center text-gray-500">
             {confirmMessage}
           </p>
-        </StyledContent>
+        </div>
         <img
           onClick={() => setDialogOpen(false)}
           src={`${process.env.PUBLIC_URL}/exit.svg`}

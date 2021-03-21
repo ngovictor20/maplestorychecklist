@@ -29,7 +29,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen }) => {
 
   return (
     <div className="flex flex-col h-full content-center">
-      <StyledBackground className="rounded-xl m-3 mb-2 flex items-center px-1 py-4">
+      <StyledBackground className="rounded-xl m-3 mb-1 flex items-center px-1 py-4">
         <div className="flex content-center justify-center w-1/4 h-full p-4 border-r-2 border-gray-200">
           <img
             src={`${process.env.PUBLIC_URL}/admin.png`}
@@ -37,7 +37,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen }) => {
             alt=""
           />
         </div>
-        <div className="relative flex bg-white ml-4 mr-1 p-6 h-full w-full rounded-xl flex flex-col">
+        <div className="relative flex bg-white ml-4 mr-1 px-4 py-4 h-full w-full rounded-xl flex flex-col">
           <label className="block">
             <span>Name</span>
             <input
