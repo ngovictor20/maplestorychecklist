@@ -26,7 +26,7 @@ const ConfirmDialog: React.FC<DialogProps> = ({
   return (
     <div className="flex flex-col h-full content-center">
       <StyledBackground className="rounded-xl m-3 mb-2 flex items-center px-1 py-4">
-        <div className="flex content-center justify-center w-1/3 h-full p-4 border-r-2 border-gray-200">
+        <div className="flex content-center justify-center w-1/3 h-full p-2 border-r-2 border-gray-200">
           <img
             src={`${process.env.PUBLIC_URL}/admin.png`}
             className="self-center"
