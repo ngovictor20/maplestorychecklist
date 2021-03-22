@@ -23,8 +23,8 @@ const ConfirmDialog: React.FC<DialogProps> = ({
   onConfirm,
 }) => {
   return (
-    <div className="flex flex-col h-1/4 content-center">
-      <StyledBackground className="rounded-xl m-3 mb-1 flex items-center px-1 py-4">
+    <div className="relative flex flex-col h-full content-center">
+      <StyledBackground className="rounded-xl m-3 mb-1 flex h-full items-center px-1 py-4">
         <div className="flex content-center justify-center w-1/4 h-full p-4 border-r-2 border-gray-200">
           <img
             src={`${process.env.PUBLIC_URL}/admin.png`}
