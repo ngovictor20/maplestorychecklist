@@ -23,9 +23,9 @@ const ConfirmDialog: React.FC<DialogProps> = ({
   onConfirm,
 }) => {
   return (
-    <div className="relative flex flex-col h-full content-center">
+    <div className="relative flex flex-col h-full content-center ">
       <StyledBackground className="rounded-xl m-3 mb-1 flex h-full items-center px-1 py-4">
-        <div className="flex content-center justify-center w-1/4 h-full p-4 border-r-2 border-gray-200">
+        <div className="flex content-center justify-center w-1/3 h-full p-4 border-r-2 border-gray-200">
           <img
             src={`${process.env.PUBLIC_URL}/admin.png`}
             className="self-center"
@@ -40,12 +40,12 @@ const ConfirmDialog: React.FC<DialogProps> = ({
         <img
           onClick={() => setDialogOpen(false)}
           src={`${process.env.PUBLIC_URL}/exit.svg`}
-          className="absolute top-0 right-0 h-4 w-4 m-4 hover:bg-blue-200"
+          className="absolute top-0 right-0 h-4 w-4 m-4 cursor-pointer"
           alt="exit"
         />
       </StyledBackground>
       <StyledButton
-        className="self-end mr-4 h-6 w-16 text-sm rounded-md text-white"
+        className="self-end mr-4 h-6 mb-2 w-16 text-sm rounded-md text-white"
         onClick={onConfirm}
       >
         OK

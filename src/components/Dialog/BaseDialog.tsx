@@ -101,7 +101,7 @@ const BaseDialog: React.FC<DialogProps> = ({ setDialogOpen, type }) => {
 
   return (
     <div className="fixed h-full w-screen z-50 inset-0 bg-gray-300 bg-opacity-75 flex justify-center items-center">
-      <StyledDiv className="relative min-w-1/4 min-h-1/3 rounded-xl text-black">
+      <StyledDiv className="relative max-w-1/3 rounded-xl text-black">
         {renderContent()}
       </StyledDiv>
     </div>

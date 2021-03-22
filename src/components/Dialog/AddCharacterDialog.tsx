@@ -18,8 +18,16 @@ const StyledButton = styled.button`
   background: linear-gradient(180deg, #ddff00 0%, #88cc00 100%);
 `;
 
+const StyledInput = styled.input`
+  -moz-appearance: textfield;
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+`;
+
 const InputClass =
-  "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50";
+  "mb-1 w-full block border-0 border-gray-300 border-b-2 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50";
 
 const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen }) => {
   const [name, setName] = useState("");
@@ -30,14 +38,10 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen }) => {
   return (
     <div className="flex flex-col h-full content-center">
       <StyledBackground className="rounded-xl m-3 mb-1 flex items-center px-1 py-4">
-        <div className="flex content-center justify-center w-1/4 h-full p-4 border-r-2 border-gray-200">
-          <img
-            src={`${process.env.PUBLIC_URL}/admin.png`}
-            className="self-center"
-            alt=""
-          />
-        </div>
-        <div className="relative flex bg-white ml-4 mr-1 px-4 py-4 h-full w-full rounded-xl flex flex-col">
+        <div className="relative flex bg-white mx-2 px-4 py-4 h-full w-full rounded-xl flex flex-col gap-2">
+          <p className="text-2xl text-center mb-2 font-semibold underline">
+            Add Character
+          </p>
           <label className="block">
             <span>Name</span>
             <input
@@ -64,7 +68,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen }) => {
           </label>
           <label className="block">
             <span>Level</span>
-            <input
+            <StyledInput
               type="number"
               max={300}
               min={0}
@@ -84,7 +88,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen }) => {
         <img
           onClick={() => setDialogOpen(false)}
           src={`${process.env.PUBLIC_URL}/exit.svg`}
-          className="absolute top-0 right-0 h-4 w-4 m-4 hover:bg-blue-200"
+          className="absolute top-0 right-0 h-4 w-4 m-4 cursor-pointer"
           alt="exit"
         />
       </StyledBackground>
@@ -93,7 +97,7 @@ const AddPictureDialog: React.FC<DialogProps> = ({ setDialogOpen }) => {
           dispatch(addChar({ name, level, class: job }));
           setDialogOpen(false);
         }}
-        className="self-end mr-4 h-6 w-16 text-sm rounded-md text-white"
+        className="self-end mr-4 h-6 mb-2 w-16 text-sm rounded-md text-white"
       >
         Add
       </StyledButton>
